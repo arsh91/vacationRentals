@@ -1,0 +1,54 @@
+[22-Jul-2021 08:00:55 America/Chicago] PHP Fatal error:  Uncaught Error: Call to a member function real_escape_string() on null in /home2/equisngs/equisourceholdings.com/vacationrentals/index.php:20
+Stack trace:
+#0 {main}
+  thrown in /home2/equisngs/equisourceholdings.com/vacationrentals/index.php on line 20
+[22-Jul-2021 08:01:49 America/Chicago] PHP Notice:  Undefined variable: conn in /home2/equisngs/equisourceholdings.com/vacationrentals/index.php on line 23
+[22-Jul-2021 08:01:49 America/Chicago] PHP Fatal error:  Uncaught Error: Call to a member function real_escape_string() on null in /home2/equisngs/equisourceholdings.com/vacationrentals/index.php:23
+Stack trace:
+#0 {main}
+  thrown in /home2/equisngs/equisourceholdings.com/vacationrentals/index.php on line 23
+[22-Jul-2021 08:17:55 America/Chicago] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home2/equisngs/equisourceholdings.com/vacationrentals/index.php:1) in /home2/equisngs/equisourceholdings.com/vacationrentals/index.php on line 37
+[22-Jul-2021 08:20:24 America/Chicago] PHP Notice:  Undefined variable: _SESSION in /home2/equisngs/equisourceholdings.com/vacationrentals/home.php on line 7
+[22-Jul-2021 08:21:41 America/Chicago] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home2/equisngs/equisourceholdings.com/vacationrentals/home.php:7) in /home2/equisngs/equisourceholdings.com/vacationrentals/home.php on line 10
+[22-Jul-2021 08:43:26 America/Chicago] PHP Warning:  include(inc/auth.php): failed to open stream: No such file or directory in /home2/equisngs/equisourceholdings.com/vacationrentals/home.php on line 6
+[22-Jul-2021 08:43:26 America/Chicago] PHP Warning:  include(inc/auth.php): failed to open stream: No such file or directory in /home2/equisngs/equisourceholdings.com/vacationrentals/home.php on line 6
+[22-Jul-2021 08:43:26 America/Chicago] PHP Warning:  include(): Failed opening 'inc/auth.php' for inclusion (include_path='.:/opt/cpanel/ea-php73/root/usr/share/pear') in /home2/equisngs/equisourceholdings.com/vacationrentals/home.php on line 6
+[22-Jul-2021 09:13:09 America/Chicago] PHP Warning:  Illegal string offset 'PropertyName' in /home2/equisngs/equisourceholdings.com/vacationrentals/cleaning_assignments.php on line 56
+[22-Jul-2021 09:13:09 America/Chicago] PHP Warning:  Illegal string offset 'CleaningDate' in /home2/equisngs/equisourceholdings.com/vacationrentals/cleaning_assignments.php on line 57
+[22-Jul-2021 09:13:09 America/Chicago] PHP Warning:  Illegal string offset 'CleaningFee' in /home2/equisngs/equisourceholdings.com/vacationrentals/cleaning_assignments.php on line 58
+[22-Jul-2021 09:13:09 America/Chicago] PHP Warning:  Illegal string offset 'DateAccepted' in /home2/equisngs/equisourceholdings.com/vacationrentals/cleaning_assignments.php on line 59
+[22-Jul-2021 09:13:09 America/Chicago] PHP Warning:  Illegal string offset 'PropertyName' in /home2/equisngs/equisourceholdings.com/vacationrentals/cleaning_assignments.php on line 56
+[22-Jul-2021 09:13:09 America/Chicago] PHP Warning:  Illegal string offset 'CleaningDate' in /home2/equisngs/equisourceholdings.com/vacationrentals/cleaning_assignments.php on line 57
+[22-Jul-2021 09:13:09 America/Chicago] PHP Warning:  Illegal string offset 'CleaningFee' in /home2/equisngs/equisourceholdings.com/vacationrentals/cleaning_assignments.php on line 58
+[22-Jul-2021 09:13:09 America/Chicago] PHP Warning:  Illegal string offset 'DateAccepted' in /home2/equisngs/equisourceholdings.com/vacationrentals/cleaning_assignments.php on line 59
+[22-Jul-2021 09:13:09 America/Chicago] PHP Warning:  Illegal string offset 'PropertyName' in /home2/equisngs/equisourceholdings.com/vacationrentals/cleaning_assignments.php on line 56
+[22-Jul-2021 09:13:09 America/Chicago] PHP Warning:  Illegal string offset 'CleaningDate' in /home2/equisngs/equisourceholdings.com/vacationrentals/cleaning_assignments.php on line 57
+[22-Jul-2021 09:13:09 America/Chicago] PHP Warning:  Illegal string offset 'CleaningFee' in /home2/equisngs/equisourceholdings.com/vacationrentals/cleaning_assignments.php on line 58
+[22-Jul-2021 09:13:09 America/Chicago] PHP Warning:  Illegal string offset 'DateAccepted' in /home2/equisngs/equisourceholdings.com/vacationrentals/cleaning_assignments.php on line 59
+[22-Jul-2021 09:13:09 America/Chicago] PHP Warning:  Illegal string offset 'PropertyName' in /home2/equisngs/equisourceholdings.com/vacationrentals/cleaning_assignments.php on line 56
+[22-Jul-2021 09:13:09 America/Chicago] PHP Warning:  Illegal string offset 'CleaningDate' in /home2/equisngs/equisourceholdings.com/vacationrentals/cleaning_assignments.php on line 57
+[22-Jul-2021 09:13:09 America/Chicago] PHP Warning:  Illegal string offset 'CleaningFee' in /home2/equisngs/equisourceholdings.com/vacationrentals/cleaning_assignments.php on line 58
+[22-Jul-2021 09:13:09 America/Chicago] PHP Warning:  Illegal string offset 'DateAccepted' in /home2/equisngs/equisourceholdings.com/vacationrentals/cleaning_assignments.php on line 59
+[22-Jul-2021 09:13:49 America/Chicago] PHP Warning:  Illegal string offset 'PropertyName' in /home2/equisngs/equisourceholdings.com/vacationrentals/cleaning_assignments.php on line 57
+[22-Jul-2021 09:13:49 America/Chicago] PHP Warning:  Illegal string offset 'CleaningDate' in /home2/equisngs/equisourceholdings.com/vacationrentals/cleaning_assignments.php on line 58
+[22-Jul-2021 09:13:49 America/Chicago] PHP Warning:  Illegal string offset 'CleaningFee' in /home2/equisngs/equisourceholdings.com/vacationrentals/cleaning_assignments.php on line 59
+[22-Jul-2021 09:13:49 America/Chicago] PHP Warning:  Illegal string offset 'DateAccepted' in /home2/equisngs/equisourceholdings.com/vacationrentals/cleaning_assignments.php on line 60
+[22-Jul-2021 09:13:49 America/Chicago] PHP Warning:  Illegal string offset 'PropertyName' in /home2/equisngs/equisourceholdings.com/vacationrentals/cleaning_assignments.php on line 57
+[22-Jul-2021 09:13:49 America/Chicago] PHP Warning:  Illegal string offset 'CleaningDate' in /home2/equisngs/equisourceholdings.com/vacationrentals/cleaning_assignments.php on line 58
+[22-Jul-2021 09:13:49 America/Chicago] PHP Warning:  Illegal string offset 'CleaningFee' in /home2/equisngs/equisourceholdings.com/vacationrentals/cleaning_assignments.php on line 59
+[22-Jul-2021 09:13:49 America/Chicago] PHP Warning:  Illegal string offset 'DateAccepted' in /home2/equisngs/equisourceholdings.com/vacationrentals/cleaning_assignments.php on line 60
+[22-Jul-2021 09:13:49 America/Chicago] PHP Warning:  Illegal string offset 'PropertyName' in /home2/equisngs/equisourceholdings.com/vacationrentals/cleaning_assignments.php on line 57
+[22-Jul-2021 09:13:49 America/Chicago] PHP Warning:  Illegal string offset 'CleaningDate' in /home2/equisngs/equisourceholdings.com/vacationrentals/cleaning_assignments.php on line 58
+[22-Jul-2021 09:13:49 America/Chicago] PHP Warning:  Illegal string offset 'CleaningFee' in /home2/equisngs/equisourceholdings.com/vacationrentals/cleaning_assignments.php on line 59
+[22-Jul-2021 09:13:49 America/Chicago] PHP Warning:  Illegal string offset 'DateAccepted' in /home2/equisngs/equisourceholdings.com/vacationrentals/cleaning_assignments.php on line 60
+[22-Jul-2021 09:13:49 America/Chicago] PHP Warning:  Illegal string offset 'PropertyName' in /home2/equisngs/equisourceholdings.com/vacationrentals/cleaning_assignments.php on line 57
+[22-Jul-2021 09:13:49 America/Chicago] PHP Warning:  Illegal string offset 'CleaningDate' in /home2/equisngs/equisourceholdings.com/vacationrentals/cleaning_assignments.php on line 58
+[22-Jul-2021 09:13:49 America/Chicago] PHP Warning:  Illegal string offset 'CleaningFee' in /home2/equisngs/equisourceholdings.com/vacationrentals/cleaning_assignments.php on line 59
+[22-Jul-2021 09:13:49 America/Chicago] PHP Warning:  Illegal string offset 'DateAccepted' in /home2/equisngs/equisourceholdings.com/vacationrentals/cleaning_assignments.php on line 60
+[22-Jul-2021 09:19:12 America/Chicago] PHP Warning:  count(): Parameter must be an array or an object that implements Countable in /home2/equisngs/equisourceholdings.com/vacationrentals/cleaning_assignments.php on line 52
+[22-Jul-2021 09:19:24 America/Chicago] PHP Warning:  count(): Parameter must be an array or an object that implements Countable in /home2/equisngs/equisourceholdings.com/vacationrentals/cleaning_assignments.php on line 52
+[22-Jul-2021 09:25:35 America/Chicago] PHP Warning:  count(): Parameter must be an array or an object that implements Countable in /home2/equisngs/equisourceholdings.com/vacationrentals/cleaning_assignments.php on line 64
+[22-Jul-2021 12:37:17 America/Chicago] PHP Warning:  count(): Parameter must be an array or an object that implements Countable in /home2/equisngs/equisourceholdings.com/vacationrentals/cleaning_assignments.php on line 64
+[22-Jul-2021 12:42:14 America/Chicago] PHP Warning:  count(): Parameter must be an array or an object that implements Countable in /home2/equisngs/equisourceholdings.com/vacationrentals/cleaning_assignments.php on line 76
+[22-Jul-2021 12:43:12 America/Chicago] PHP Warning:  count(): Parameter must be an array or an object that implements Countable in /home2/equisngs/equisourceholdings.com/vacationrentals/cleaning_assignments.php on line 78
+[22-Jul-2021 14:20:35 America/Chicago] PHP Notice:  Undefined variable: error in /home2/equisngs/equisourceholdings.com/vacationrentals/changePass.php on line 56
