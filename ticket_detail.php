@@ -425,7 +425,7 @@ $( ".radiobuttons" ).each(function() {
                 $('input#Eta_custom_time').attr('required', 'required');
             }
 
-            var dateFormat = "yy-dd-mm",
+            var dateFormat = "mm-dd-yy",
         
                 from = $("#Eta_custom_date").datepicker({
                     defaultDate: "+1w",
@@ -573,26 +573,27 @@ $( ".radiobuttons" ).each(function() {
                 }
             
         });
-        $('#CustomDatetime').click(function() {
-            var customEtaDate = $('#Eta_custom_date').val();
-            var newcustomEtaDate = moment(customEtaDate,"YYYY-DD-MM").format("DD-MM-YYYY");
-            var customEtaTime = $('#Eta_custom_time').val();
-            var dateTime = newcustomEtaDate+" "+customEtaTime;
 
-            if (confirm("Please confirm.  You wish to set an ETA of"+" "+dateTime+" "+"for this ticket?")) {
+            $('#CustomDatetime').click(function() {
+                var customEtaDate = $('#Eta_custom_date').val();
+                //var newcustomEtaDate = moment(customEtaDate,"YYYY-DD-MM").format("DD-MM-YYYY");
+                var customEtaTime = $('#Eta_custom_time').val();
+                var dateTime = customEtaDate+" "+customEtaTime;
 
-            var ticket_id = $('.ticket_id').text();
-            var teamMemberId = $(this).attr('teamMemberId');
-            var eta_radio = $(".custom_date_time").val();
-            var newcustomEtaTime = moment(customEtaTime, "hh:mm A").format("HH:mm:ss");
+                if (confirm("Please confirm.  You wish to set an ETA of"+" "+dateTime+" "+"for this ticket?")) {
 
-            ETAFunction(ticket_id,eta_radio,teamMemberId,"",customEtaDate,newcustomEtaTime)
-            $('.custom_field').hide();
-            $('input#Eta_custom_date').removeAttr('required');
-            $('input#Eta_custom_time').removeAttr('required');
-           
-            }
-        });
+                var ticket_id = $('.ticket_id').text();
+                var teamMemberId = $(this).attr('teamMemberId');
+                var eta_radio = $(".custom_date_time").val();
+                var newcustomEtaTime = moment(customEtaTime, "hh:mm A").format("HH:mm:ss");
+
+                ETAFunction(ticket_id,eta_radio,teamMemberId,"",customEtaDate,newcustomEtaTime)
+                $('.custom_field').hide();
+                $('input#Eta_custom_date').removeAttr('required');
+                $('input#Eta_custom_time').removeAttr('required');
+            
+                }
+            });
 
 
 });
