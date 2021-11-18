@@ -40,26 +40,11 @@ include 'inc/auth.php';
     border: 2px solid #f2f2f2;
 }
 
-.addReadMore.showlesscontent .SecSec,
-.addReadMore.showlesscontent .readLess {
-    display: none;
+.morecontent span {
+  display:none;
 }
-
-.addReadMore.showmorecontent .readMore {
-    display: none;
-}
-
-.addReadMore .readMore,
-.addReadMore .readLess {
-    font-weight: bold;
-    margin-left: 2px;
-    color: blue;
-    cursor: pointer;
-}
-
-.addReadMoreWrapTxt.showmorecontent .SecSec,
-.addReadMoreWrapTxt.showmorecontent .readLess {
-    display: block;
+.morelink {
+  display:block;
 }
 </style>
 
@@ -557,7 +542,7 @@ include 'inc/auth.php';
             var ticketId = $(this).closest('tr').attr('data-ticketId');
             var teamMembersNo = $(this).closest('tr').attr('data-teamMembersNo');
             $.ajax({
-                url: 'ticket_detail.php',
+                url: '../wecare/ticket_detail.php',
                 method: "POST",
                 data: {
                     "ticketNum": ticketId,
@@ -585,7 +570,8 @@ include 'inc/auth.php';
         });
 
         $('.emailqueueBtn').click(function() {
-            var ticket_id = $('#ticketDetailModal .ticketDetail .get_ticket_id').text();
+            var ticket_id = $('#ticketDetailModal .ticketDetail .ticket_id').text();
+            // alert(ticket_id);
             $('.ticketDetailsHeader').hide();
             $('.EmailDetailsHeader').show();
             $('.ticketDetail').hide();

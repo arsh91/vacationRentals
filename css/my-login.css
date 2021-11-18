@@ -28,7 +28,12 @@ body.my-login-page {
 .my-login-page .brand img {
 	width: 100%;
 }
-
+.reserved_table {
+	max-height: 300px;
+	overflow: hidden;
+	overflow-y: scroll;
+	margin-bottom: 15px;
+}
 /* .my-login-page .card-wrapper {
 	width: 400px;
 } */
