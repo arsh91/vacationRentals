@@ -95,3 +95,31 @@ body.my-login-page {
 		padding: 15px;
 	}
 }
+.linkTable{
+	max-width: 500px;
+  }
+
+.morecontent span {
+	display:none;
+	}
+	.morelink {
+	display:block;
+	}
+	
+	.technotesDiv {
+	  inline-size: 330px;
+	  overflow-wrap: break-word;
+	}
+	a.maintenanceHistoryTable{
+	  color: rgb(0 0 0 / 90%);
+	  display: block;
+	}
+	a.maintenanceHistoryTable:hover {
+		color: rgb(0 0 0 / 90%);
+		text-decoration: none;
+		 
+		
+	}
+	/* td a.maintenanceHistoryTable { 
+		display: block; 
+	} */

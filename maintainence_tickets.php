@@ -542,7 +542,7 @@ include 'inc/auth.php';
             var ticketId = $(this).closest('tr').attr('data-ticketId');
             var teamMembersNo = $(this).closest('tr').attr('data-teamMembersNo');
             $.ajax({
-                url: '../wecare/ticket_detail.php',
+                url: 'ticket_detail.php',
                 method: "POST",
                 data: {
                     "ticketNum": ticketId,
@@ -687,8 +687,7 @@ include 'inc/auth.php';
                 }
             });
            
-        });
-
+        }); 
         
     });
     </script>
