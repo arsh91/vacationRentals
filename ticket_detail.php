@@ -110,28 +110,28 @@ $eta_custom_date = $eta_custom_time = '';
                             <div class="form-check">
                                 <input
                                 class="form-check-input" type="radio" value="Guest_appeared_satisfied"
-                                name="Guest_Satisfaction_Level_radio" id="Guest_Satisfaction_Level_radio1">
+                                name="Guest_Satisfaction_Level_radio" id="Guest_Satisfaction_Level_radio1" required>
                                 <label class="form-check-label" for="Guest_Satisfaction_Level_radio1">The Guest appeared satisfied
                                 </label>
                             </div>
                             <div class="form-check">
                                 <input
                                 class="form-check-input" type="radio" value="Guest_did_not_appear_satisfied_dissatisfied"
-                                name="Guest_Satisfaction_Level_radio" id="Guest_Satisfaction_Level_radio2">
+                                name="Guest_Satisfaction_Level_radio" id="Guest_Satisfaction_Level_radio2" required>
                                 <label class="form-check-label" for="Guest_Satisfaction_Level_radio2">The Guest did not appear either satisfied or dissatisfied
                                 </label>
                             </div>
                             <div class="form-check">
                                 <input
                                 class="form-check-input" type="radio" value=" Guest_dissatisfied_with_resolution_other issues"
-                                name="Guest_Satisfaction_Level_radio" id="Guest_Satisfaction_Level_radio3">
+                                name="Guest_Satisfaction_Level_radio" id="Guest_Satisfaction_Level_radio3" required>
                                 <label class="form-check-label" for="Guest_Satisfaction_Level_radio3">The Guest was dissatisfied with this resolution and/or other issues
                                 </label>
                             </div>
                             <div class="form-check">
                                 <input
                                 class="form-check-input" type="radio" value="not_certain"
-                                name="Guest_Satisfaction_Level_radio" id="Guest_Satisfaction_Level_radio4">
+                                name="Guest_Satisfaction_Level_radio" id="Guest_Satisfaction_Level_radio4" required>
                                 <label class="form-check-label" for="Guest_Satisfaction_Level_radio4">I'm not certain of the Guest's satisfaction level
                                 </label>
                             </div>
@@ -525,7 +525,7 @@ $eta_custom_date = $eta_custom_time = '';
                                             foreach($toogleIssueMaintenenceDatas as $toogleIssueMaintenenceData){
                                                 //echo "<pre>"; print_r($toogleTeamData);
                                                 $issueticket_id = base64_encode($toogleIssueMaintenenceData['TicketNum']);
-                                                
+
                                             $similarTicketsMaintenenceTable_html .= '<tr><td><a class="maintenanceHistoryTable" href="ticket_detail.php?ticketNum=' . $issueticket_id .'&teamMemberNo='.base64_encode($teamMemberNo).'" target="_blank">'.$toogleIssueMaintenenceData['Property'].'</a></td><td><a class="maintenanceHistoryTable" href="ticket_detail.php?ticketNum=' . $issueticket_id .'&teamMemberNo='.base64_encode($teamMemberNo).'" target="_blank">'.date("m-d-Y", strtotime($toogleIssueMaintenenceData['TicketDate']) ).'</a></td><td class="issueDiscription"><a class="maintenanceHistoryTable" href="ticket_detail.php?ticketNum=' . $issueticket_id .'&teamMemberNo='.base64_encode($teamMemberNo).'" target="_blank">'.$toogleIssueMaintenenceData['IssueDescription'].'</a></td></tr>';
                                             }
                                             $similarTicketsMaintenenceTable_html.='</tbody></table>  </div>';
@@ -981,6 +981,18 @@ alert(teamMemberId);
                     });
 
         });
+
+        //Close Ticket
+        $('#ticketClose').click(function () {
+
+        if (confirm('If the Guest is satisfied and this ticket is complete, click OK to close this ticket. \r\n If the ticket is incomplete, click cancel to leave the ticket open.')) {
+            $('#submitModal').modal("show");
+        } else {
+
+            //alert('Why did you press cancel? You should have confirmed');
+        }
+
+        })
     
     });
     
