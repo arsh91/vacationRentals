@@ -23,7 +23,6 @@
 
 <body>
     <?php 
-    
 $close_date = date("Y-m-d");
 $close_time = date("H:i:s");
 if(isset($_GET['ticketNum']) && isset($_GET['teamMemberNo']) ){
@@ -33,6 +32,8 @@ $teamMemberNo = base64_decode($_GET['teamMemberNo']);
 else{
     $ticketNumber = $_POST['ticketNum'];
     $teamMemberNo = $_POST['teamMembersNo'];
+  
+    
 }
 
 // UPDATE THE FIELDS AFTER TICKET CLOSED
@@ -67,6 +68,7 @@ $teamMemberData = $db->query('SELECT * FROM Team WHERE TeamMemberID = ?', $ticke
 
 if($ticketData['ETATeamMemberID'] > 0){
 $teamMemberName = $db->query('SELECT * FROM Team WHERE TeamMemberID = ?' , $ticketData['ETATeamMemberID'])->fetchArray();
+
 }
 
 $teamAdminData = $db->query('SELECT admin FROM Team WHERE TeamMemberID = ?' ,$teamMemberNo)->fetchArray();
@@ -77,7 +79,6 @@ $technotes = $db->query('SELECT technotes FROM MaintenanceAssignements WHERE Cat
 
 $eta_custom_date_time = "display:none;";
 $eta_custom_date = $eta_custom_time = '';
-		
 ?>
     <div class="modal fade" id="submitModal" tabindex="-1" role="dialog" aria-labelledby="submitModalLabel"
         aria-hidden="true">
@@ -102,7 +103,7 @@ $eta_custom_date = $eta_custom_time = '';
                         </div>
                         <div class="form-group">
                             <label for="Hours-Billed" class="col-form-label"><strong>Hours Billed for Job:</strong></label>
-                            <input class="form-control"  type="number" id="hoursbilled" name="hoursbilled">
+                            <input class="form-control"  type="number"  step="0.01"  id="hoursbilled" name="hoursbilled">
                         </div>
                         <div class="form-group">
                             <label for="Guest-Satisfaction-Level" class="col-form-label"><strong>Guest Satisfaction Level:</strong></label>
@@ -131,7 +132,7 @@ $eta_custom_date = $eta_custom_time = '';
                                 <input
                                 class="form-check-input" type="radio" value="not_certain"
                                 name="Guest_Satisfaction_Level_radio" id="Guest_Satisfaction_Level_radio4">
-                                <label class="form-check-label" for="Guest_Satisfaction_Level_radio4">I’m not certain of the Guest’s satisfaction level
+                                <label class="form-check-label" for="Guest_Satisfaction_Level_radio4">I'm not certain of the Guest's satisfaction level
                                 </label>
                             </div>
                         </div>
@@ -459,7 +460,7 @@ $eta_custom_date = $eta_custom_time = '';
                                             </div>
                                             <!-- TECH NOTES FIELD -->
                                             <?php
-                                            if(isset($technotes["technotes"]) && $technotes["technotes"] != " " ){
+                                            if(isset($technotes["technotes"]) && $technotes["technotes"] != "" ){
                                             ?>
                                             <div class="technotesDiv mb-3"><span class="titleStyle ">Tech Notes: </span><span class="more"><?= $technotes["technotes"]; ?> </span></div>
                                             <?php
@@ -489,7 +490,7 @@ $eta_custom_date = $eta_custom_time = '';
                                                 </div> 
                                             
                                                 <div class="reserved_table">
-                                            <table class="table table-bordered table-striped"><thead style="position: sticky;top:0; background:#dee2e6;"><tr><th> Date</th><th>Issue</th><th>IssueDescription</th></tr></thead><tbody class="bodyHide">';
+                                            <table class="table table-bordered table-striped"><thead style="position: sticky;top:0; background:#dee2e6;"><tr><th> Date</th><th>Issue</th><th>Issue Description</th></tr></thead><tbody class="bodyHide">';
     
                                             foreach($tooglePropertyMaintenenceDatas as $tooglePropertyMaintenenceData){
                                                 //echo "<pre>"; print_r($toogleTeamData);
@@ -497,7 +498,7 @@ $eta_custom_date = $eta_custom_time = '';
                                                 $ticket_id = base64_encode($tooglePropertyMaintenenceData['TicketNum']);
                                                 
                                                 $newIssueDiscription = strlen($issueDiscription) > 50 ? substr($issueDiscription,0,50)."..." : $issueDiscription;
-                                            $MaintenenceTable_html .= '<tr><td><a class="maintenanceHistoryTable" href="ticket_detail.php?ticketNum=' . $ticket_id .'&teamMemberNo='.base64_encode($teamMemberNo).'" target="_blank">'.$tooglePropertyMaintenenceData['TicketDate'].'</a></td><td class="Source"><a class="maintenanceHistoryTable" href="ticket_detail.php?ticketNum=' . $ticket_id .'&teamMemberNo='.base64_encode($teamMemberNo).'" target="_blank">'.$tooglePropertyMaintenenceData['Issue'].'</a></td><td><a class="maintenanceHistoryTable" href="ticket_detail.php?ticketNum=' . $ticket_id .'&teamMemberNo='.base64_encode($teamMemberNo).'" target="_blank">'.$newIssueDiscription.'</a></td></tr>';
+                                            $MaintenenceTable_html .= '<tr><td><a class="maintenanceHistoryTable" href="ticket_detail.php?ticketNum=' . $ticket_id .'&teamMemberNo='.base64_encode($teamMemberNo).'" target="_blank">'.date("m-d-Y", strtotime($tooglePropertyMaintenenceData['TicketDate']) ).'</a></td><td class="Source"><a class="maintenanceHistoryTable" href="ticket_detail.php?ticketNum=' . $ticket_id .'&teamMemberNo='.base64_encode($teamMemberNo).'" target="_blank">'.$tooglePropertyMaintenenceData['Issue'].'</a></td><td><a class="maintenanceHistoryTable" href="ticket_detail.php?ticketNum=' . $ticket_id .'&teamMemberNo='.base64_encode($teamMemberNo).'" target="_blank">'.$newIssueDiscription.'</a></td></tr>';
                                             }
                                             $MaintenenceTable_html.='</tbody></table>  </div>';
                                             
@@ -515,16 +516,17 @@ $eta_custom_date = $eta_custom_time = '';
 
                                             <!-- SAME TICKETS HISTORY TABLE -->
                                             <?php
-                                            $toogleIssueMaintenenceDatas = $db->query('SELECT TicketNum, Property , Issue , IssueDescription FROM MaintenanceTicket WHERE Issue = ? ORDER BY Property DESC' ,$ticketData['Issue'])->fetchAll();
+                                            $toogleIssueMaintenenceDatas = $db->query('SELECT TicketDate, TicketNum, Property , Issue , IssueDescription FROM MaintenanceTicket WHERE Issue = ? ORDER BY Property DESC' ,$ticketData['Issue'])->fetchAll();
                                             
                                             $similarTicketsMaintenenceTable_html = 
                                             '<div class="reserved_table">
-                                            <table class="table table-bordered table-striped"><thead style="position: sticky;top:0; background:#dee2e6;"><tr><th> Date</th><th>Issue</th><th>IssueDescription</th></tr></thead><tbody>';
+                                            <table class="table table-bordered table-striped"><thead style="position: sticky;top:0; background:#dee2e6;"><tr><th style="width: 150px;">Property Name</th><th>Date</th><th>Issue Description</th></tr></thead><tbody>';
     
                                             foreach($toogleIssueMaintenenceDatas as $toogleIssueMaintenenceData){
                                                 //echo "<pre>"; print_r($toogleTeamData);
                                                 $issueticket_id = base64_encode($toogleIssueMaintenenceData['TicketNum']);
-                                            $similarTicketsMaintenenceTable_html .= '<tr><td><a class="maintenanceHistoryTable" href="ticket_detail.php?ticketNum=' . $issueticket_id .'&teamMemberNo='.base64_encode($teamMemberNo).'" target="_blank">'.$toogleIssueMaintenenceData['Property'].'</a></td><td><a class="maintenanceHistoryTable" href="ticket_detail.php?ticketNum=' . $issueticket_id .'&teamMemberNo='.base64_encode($teamMemberNo).'" target="_blank">'.$toogleIssueMaintenenceData['Issue'].'</a></td><td class="issueDiscription"><a class="maintenanceHistoryTable" href="ticket_detail.php?ticketNum=' . $issueticket_id .'&teamMemberNo='.base64_encode($teamMemberNo).'" target="_blank">'.$toogleIssueMaintenenceData['IssueDescription'].'</a></td></tr>';
+                                                
+                                            $similarTicketsMaintenenceTable_html .= '<tr><td><a class="maintenanceHistoryTable" href="ticket_detail.php?ticketNum=' . $issueticket_id .'&teamMemberNo='.base64_encode($teamMemberNo).'" target="_blank">'.$toogleIssueMaintenenceData['Property'].'</a></td><td><a class="maintenanceHistoryTable" href="ticket_detail.php?ticketNum=' . $issueticket_id .'&teamMemberNo='.base64_encode($teamMemberNo).'" target="_blank">'.date("m-d-Y", strtotime($toogleIssueMaintenenceData['TicketDate']) ).'</a></td><td class="issueDiscription"><a class="maintenanceHistoryTable" href="ticket_detail.php?ticketNum=' . $issueticket_id .'&teamMemberNo='.base64_encode($teamMemberNo).'" target="_blank">'.$toogleIssueMaintenenceData['IssueDescription'].'</a></td></tr>';
                                             }
                                             $similarTicketsMaintenenceTable_html.='</tbody></table>  </div>';
                                             
@@ -688,6 +690,7 @@ $eta_custom_date = $eta_custom_time = '';
             var eta =$(this).attr("eta");
             var today = new Date();
             var Time = today.getHours();
+            // alert(Time);
             if(DisabledEtaTime <= Time && eta == "today" ){
                 $(this).attr('disabled', 'disabled');  
             }
@@ -765,6 +768,7 @@ $eta_custom_date = $eta_custom_time = '';
                 },
                 success: function(response) {
                     var response = JSON.parse(response);
+                    //console.log(response);
                     if (response.doorCode) {
                         $(".doorcode").html("<span class='titleStyle'>" + " Door code:" +
                             "</span>" + " " + response.doorCode);
@@ -795,6 +799,8 @@ $eta_custom_date = $eta_custom_time = '';
             });
         };
         $('input[name=eta_radio]').click(function() {
+            var teamMemberId = $('.teammember').attr('teamMemberId');
+alert(teamMemberId);
             $("input[type=radio][name=unable_resolve_eta_radio]").prop('checked', false);
             $("input[type=radio][name=custom_eta_radio]").prop('checked', false);
             $('.custom_field').hide();
@@ -841,13 +847,11 @@ $eta_custom_date = $eta_custom_time = '';
                 var dateTime = date+" "+time;
                
             }
+           
             
-            
-            
-          
             if (confirm("Please confirm.  You wish to set an ETA of"+" "+dateTime+" "+"for this ticket?")) {
             var ticket_id = $('.ticket_id').text();
-            var teamMemberId = $('.teammember').attr('teamMemberId');
+            // var teamMemberId = $('.teammember').attr('teamMemberId');
             var eta_radio = $(this).val();
 
             ETAFunction(ticket_id,eta_radio,teamMemberId,checkoutdate,"","");

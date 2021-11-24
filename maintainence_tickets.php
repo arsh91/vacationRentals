@@ -50,9 +50,10 @@ include 'inc/auth.php';
 
 <body class="my-login-page">
 <?php
-  
+//   print_r($_SESSION);
     $teamMembersNo = $_SESSION['user']['TeamMemberID'];
-    
+    $admin = $_SESSION['user']['Admin'];
+
 		$dateRangeFields = "display:none;";
 		$from_date = $to_date = '';
 		
@@ -124,6 +125,7 @@ include 'inc/auth.php';
                     </div>
                     <?php } ?>
                     <form method="post" action="" name="search_filter">
+                        <input type="hidden" class="admin" value="<?php echo $admin;?>">
                         <div class="form-group">
                             <select name="date_filter" class="form-control select_filter" id="date_filter">
                                 <option value="all" selected="selected">Date Range</option>
@@ -233,7 +235,7 @@ include 'inc/auth.php';
                                         </div>
                                         <div class="form-group">
                                             <label for="Hours-Billed" class="col-form-label"><strong>Hours Billed for Job:</strong></label>
-                                            <input class="form-control" type="number" id="hoursbilled" name="hoursbilled">
+                                            <input class="form-control" type="number" step="0.01" id="hoursbilled" name="hoursbilled">
                                         </div>
                                         <div class="form-group">
                                             <label for="Guest-Satisfaction-Level" class="col-form-label"><strong>Guest Satisfaction Level:</strong></label>
@@ -345,7 +347,7 @@ include 'inc/auth.php';
 							if(count($assignments) > 0) {
                             	foreach($assignments as $val) {
                         ?>
-                            <tr class="row_data" data-ticketId="<?php echo $val['TicketNum']; ?>" data-teamMembersNo="<?php echo $teamMembersNo; ?>">
+                            <tr class="row_data" data-ticketId="<?php echo $val['TicketNum']; ?>" data-teamMembersNo="<?php echo $teamMembersNo; ?>" data-admin="<?php echo $admin; ?>">
                                 <td class="openTicketDetailModal"><?php echo $val['Property']; ?></td>
                                 <td class="openTicketDetailModal"><?php echo $val['Urgency']; ?></td>
                                 <td class="openTicketDetailModal">
@@ -608,7 +610,6 @@ include 'inc/auth.php';
             var assignedto = $('#assignedto').val();
             var fromDate = $('#from_date').val();
             var toDate = $('#to_date').val();
-
             
              $.ajax({
                 type: "POST",
@@ -637,10 +638,16 @@ include 'inc/auth.php';
                         var ClosedDate = moment(value.ClosedDate, "YYYY-MM-DD").format("MM-DD-YYYY");
                         var ClosedTime = moment(value.ClosedTime, "HH:mm:ss").format("hh:mm A");
 
-
+                        var admin = $('.admin').val();
 
                         event_data += '<tr class="row_data" data-ticketId="'+ value.TicketNum +'" data-teamMembersNo= "'+ value.ETATeamMemberID+'">';
-                        event_data +='<td class="openTicketDetailModal">'+value.Property+'</td><td class="openTicketDetailModal">'+value.Urgency +'</td><td class="openTicketDetailModal">'+TicketDate+" "+TicketTime+'</td><td class="openTicketDetailModal">'+value.Issue+'</td>';
+                        event_data +='<td class="openTicketDetailModal">'+value.Property+'</td><td class="openTicketDetailModal">'+value.Urgency +'</td><td class="openTicketDetailModal">'+TicketDate+" "+TicketTime+'</td>';
+                        if(admin =="Y"){
+                            event_data +='<td>'+value.categorySelectBox+'</td>';
+                        } else {
+                            event_data +='<td class="openTicketDetailModal">'+value.Issue+'</td>';                      
+                        }
+                        
                         if(value.ETADate!=null){
                         event_data +='<td class="openTicketDetailModal">'+ETADate+" "+ETATime+'</td>';
                         }else{
@@ -661,6 +668,8 @@ include 'inc/auth.php';
                    
                     $('.openTicketDetailModal').unbind('click').bind('click', openTicketDetailModal);
                     $('.closedbutton').unbind('click').bind('click', closedbutton);
+                    $('.category').unbind('change').bind('change', category);
+
 
 
 
@@ -669,9 +678,9 @@ include 'inc/auth.php';
 
             });
         });
-
+        
         //CATEGORY SELECT BOX ON CHANGE FUNCTION
-        $(".category").change(function() {
+        function category() {
             var ticketId = $(this).closest('tr').attr('data-ticketId');
             var categoryName = $(".category").val();
             $.ajax({
@@ -687,7 +696,9 @@ include 'inc/auth.php';
                 }
             });
            
-        }); 
+        }; 
+        $('.category').unbind('change').bind('change', category);
+
         
     });
     </script>
