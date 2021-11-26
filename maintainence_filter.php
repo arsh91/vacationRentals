@@ -55,8 +55,28 @@ if(isset($_POST) && !empty($_POST)){
                    }
                 }
 
+                // $categorySelectBox="";
+                
 
+                foreach($assignments as $key => $assignment){    
 
+                    
+                    $categorybox= $db->query('SELECT Category, PropertyID, CategoryID FROM MaintenanceAssignements WHERE PropertyID=?',  $assignment['property_Id'])->fetchAll();
+
+                    
+                    $categorySelectBox ='<form><div class="form-group"><select name="category" class="form-control category" id="category"><option value="">category</option>';
+                    foreach($categorybox as $val){
+                        $selectedCategory="";
+                        if($assignment['Issue'] == $val['Category']){
+                            $selectedCategory = "selected=selected";
+                        }
+                      
+                        $categorySelectBox .="<option categoryId='".$val['CategoryID']."' value='".$val['Category']."'".$selectedCategory.">".$val['Category']."</option>";
+                    }
+                    $categorySelectBox .="</select></div></form>";
+
+                    $assignments[$key]['categorySelectBox'] = $categorySelectBox;
+                }
 
     echo json_encode(array("assignments" => $assignments));
     exit;

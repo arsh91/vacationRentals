@@ -39,12 +39,21 @@ include 'inc/auth.php';
 .emailqueue_table thead tr th {
     border: 2px solid #f2f2f2;
 }
+
+.morecontent span {
+  display:none;
+}
+.morelink {
+  display:block;
+}
 </style>
 
 <body class="my-login-page">
 <?php
+//   print_r($_SESSION);
     $teamMembersNo = $_SESSION['user']['TeamMemberID'];
-    
+    $admin = $_SESSION['user']['Admin'];
+
 		$dateRangeFields = "display:none;";
 		$from_date = $to_date = '';
 		
@@ -116,6 +125,7 @@ include 'inc/auth.php';
                     </div>
                     <?php } ?>
                     <form method="post" action="" name="search_filter">
+                        <input type="hidden" class="admin" value="<?php echo $admin;?>">
                         <div class="form-group">
                             <select name="date_filter" class="form-control select_filter" id="date_filter">
                                 <option value="all" selected="selected">Date Range</option>
@@ -208,7 +218,7 @@ include 'inc/auth.php';
                             <div class="modal-content">
                                 <form method="POST" action="closed_tickets.php" class="closeTicketForm">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="submitModalLabel">NOTES</h5>
+                                        <h5 class="modal-title" id="submitModalLabel"><strong>NOTES</strong></h5>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
@@ -222,6 +232,41 @@ include 'inc/auth.php';
                                                 characters remaining
                                             </div>
                                             <input type="hidden" name="ticketnum" class="ticketnum"></input>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="Hours-Billed" class="col-form-label"><strong>Hours Billed for Job:</strong></label>
+                                            <input class="form-control" type="number" step="0.01" id="hoursbilled" name="hoursbilled">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="Guest-Satisfaction-Level" class="col-form-label"><strong>Guest Satisfaction Level:</strong></label>
+                                            <div class="form-check">
+                                                <input
+                                                class="form-check-input GuestSatisfactionLevel" type="radio" value="Guest_appeared_satisfied"
+                                                name="Guest_Satisfaction_Level_radio" id="Guest_Satisfaction_Level_radio1" required>
+                                                <label class="form-check-label" for="Guest_Satisfaction_Level_radio1">The Guest appeared satisfied
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input
+                                                class="form-check-input GuestSatisfactionLevel" type="radio" value="Guest_did_not_appear_satisfied_dissatisfied"
+                                                name="Guest_Satisfaction_Level_radio" id="Guest_Satisfaction_Level_radio2" required>
+                                                <label class="form-check-label" for="Guest_Satisfaction_Level_radio2">The Guest did not appear either satisfied or dissatisfied
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input
+                                                class="form-check-input GuestSatisfactionLevel" type="radio" value=" Guest_dissatisfied_with_resolution_other issues"
+                                                name="Guest_Satisfaction_Level_radio" id="Guest_Satisfaction_Level_radio3" required>
+                                                <label class="form-check-label" for="Guest_Satisfaction_Level_radio3">The Guest was dissatisfied with this resolution and/or other issues
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input
+                                                class="form-check-input GuestSatisfactionLevel"  type="radio" value="not_certain"
+                                                name="Guest_Satisfaction_Level_radio" id="Guest_Satisfaction_Level_radio4" required>
+                                                <label class="form-check-label" for="Guest_Satisfaction_Level_radio4">I’m not certain of the Guest’s satisfaction level
+                                                </label>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="modal-footer">
@@ -292,7 +337,7 @@ include 'inc/auth.php';
                                 <th scope="col">Property Name</th>
                                 <th scope="col">Urgency</th>
                                 <th scope="col">Opened Date</th>
-                                <th scope="col" style="width:70px;">Category</th>
+                                <th scope="col" style="width:250px;">Category</th>
                                 <th scope="col">ETA Date</th>
                                 <th scope="col">Closed Date</th>
                             </tr>
@@ -302,13 +347,47 @@ include 'inc/auth.php';
 							if(count($assignments) > 0) {
                             	foreach($assignments as $val) {
                         ?>
-                            <tr class="row_data" data-ticketId="<?php echo $val['TicketNum']; ?>" data-teamMembersNo="<?php echo $teamMembersNo; ?>">
+                            <tr class="row_data" data-ticketId="<?php echo $val['TicketNum']; ?>" data-teamMembersNo="<?php echo $teamMembersNo; ?>" data-admin="<?php echo $admin; ?>">
                                 <td class="openTicketDetailModal"><?php echo $val['Property']; ?></td>
                                 <td class="openTicketDetailModal"><?php echo $val['Urgency']; ?></td>
                                 <td class="openTicketDetailModal">
                                     <?php echo date("m-d-Y", strtotime($val['TicketDate']) )." ".date("h:i A", strtotime($val['TicketTime']) ); ?>
                                 </td>
-                                <td class="openTicketDetailModal"><?php echo $val['Issue']; ?></td>
+                                
+                                    <?php 
+                                    if ($_SESSION['user']['Admin'] == "Y"){                                      
+						                $categories =$db->query("SELECT Category FROM MaintenanceAssignements WHERE PropertyID=?",$val['property_Id'])->fetchAll(); 
+						            ?>
+                                    <td>
+                                <form>
+                                    <div class="form-group">
+                                        <select name="category" class="form-control category" id="category">
+                                        <option value="">category</option>
+                                            <?php
+                                            
+                                                foreach($categories as $category) {
+                                                    $selectedCategory="";
+                                                    if($val['Issue'] == $category['Category']){
+                                                        $selectedCategory = "selected=selected";
+                                                    }
+                                            ?>
+                                            <option value="<?php echo $category['Category'];?>" <?php echo $selectedCategory; ?>><?php echo $category['Category'];?>
+                                            </option>
+                                            <?php 
+                                                }
+                                            ?>
+                                        </select>
+                                    </div>
+                                 </form>
+                                <?php
+                                    }else{?>
+                                    
+                                        <td class="openTicketDetailModal">
+                                            <?php
+                                        echo $val['Issue']; 
+                                    }
+                                    ?>
+                                </td>
                                 <td class="openTicketDetailModal text-center">
                                     
                                     <?php 
@@ -438,13 +517,17 @@ include 'inc/auth.php';
             e.preventDefault();
             var ticketid = $('input[name="ticketnum"]').val();
             var notes = $('textarea#notes').val();
-
+            var GuestSatisfactionLevel = $('input[name="Guest_Satisfaction_Level_radio"]').val();
+            var hoursbilled = $('#hoursbilled').val();
+           
             $.ajax({
                 type: "POST",
                 url: "closed_tickets.php",
                 data: {
                     'ticketnum': ticketid,
-                    'notes': notes
+                    'notes': notes,
+                    "hoursbilled": hoursbilled,
+                    "GuestSatisfactionLevel": GuestSatisfactionLevel
                 },
                 success: function(response) {
                     var response = JSON.parse(response);
@@ -489,7 +572,8 @@ include 'inc/auth.php';
         });
 
         $('.emailqueueBtn').click(function() {
-            var ticket_id = $('#ticketDetailModal .ticketDetail .get_ticket_id').text();
+            var ticket_id = $('#ticketDetailModal .ticketDetail .ticket_id').text();
+            // alert(ticket_id);
             $('.ticketDetailsHeader').hide();
             $('.EmailDetailsHeader').show();
             $('.ticketDetail').hide();
@@ -526,7 +610,6 @@ include 'inc/auth.php';
             var assignedto = $('#assignedto').val();
             var fromDate = $('#from_date').val();
             var toDate = $('#to_date').val();
-
             
              $.ajax({
                 type: "POST",
@@ -555,10 +638,16 @@ include 'inc/auth.php';
                         var ClosedDate = moment(value.ClosedDate, "YYYY-MM-DD").format("MM-DD-YYYY");
                         var ClosedTime = moment(value.ClosedTime, "HH:mm:ss").format("hh:mm A");
 
-
+                        var admin = $('.admin').val();
 
                         event_data += '<tr class="row_data" data-ticketId="'+ value.TicketNum +'" data-teamMembersNo= "'+ value.ETATeamMemberID+'">';
-                        event_data +='<td class="openTicketDetailModal">'+value.Property+'</td><td class="openTicketDetailModal">'+value.Urgency +'</td><td class="openTicketDetailModal">'+TicketDate+" "+TicketTime+'</td><td class="openTicketDetailModal">'+value.Issue+'</td>';
+                        event_data +='<td class="openTicketDetailModal">'+value.Property+'</td><td class="openTicketDetailModal">'+value.Urgency +'</td><td class="openTicketDetailModal">'+TicketDate+" "+TicketTime+'</td>';
+                        if(admin =="Y"){
+                            event_data +='<td>'+value.categorySelectBox+'</td>';
+                        } else {
+                            event_data +='<td class="openTicketDetailModal">'+value.Issue+'</td>';                      
+                        }
+                        
                         if(value.ETADate!=null){
                         event_data +='<td class="openTicketDetailModal">'+ETADate+" "+ETATime+'</td>';
                         }else{
@@ -579,6 +668,8 @@ include 'inc/auth.php';
                    
                     $('.openTicketDetailModal').unbind('click').bind('click', openTicketDetailModal);
                     $('.closedbutton').unbind('click').bind('click', closedbutton);
+                    $('.category').unbind('change').bind('change', category);
+
 
 
 
@@ -587,7 +678,26 @@ include 'inc/auth.php';
 
             });
         });
-
+        
+        //CATEGORY SELECT BOX ON CHANGE FUNCTION
+        function category() {
+            var ticketId = $(this).closest('tr').attr('data-ticketId');
+            var categoryName = $(".category").val();
+            $.ajax({
+                url: 'updateMaintainence_category.php',
+                method: "POST",
+                data: {
+                    "ticketNum": ticketId,
+                    "categoryName":categoryName
+                    
+                },
+                success: function(response) {
+                    
+                }
+            });
+           
+        }; 
+        $('.category').unbind('change').bind('change', category);
 
         
     });

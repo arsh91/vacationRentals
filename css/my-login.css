@@ -28,7 +28,12 @@ body.my-login-page {
 .my-login-page .brand img {
 	width: 100%;
 }
-
+.reserved_table {
+	max-height: 300px;
+	overflow: hidden;
+	overflow-y: scroll;
+	margin-bottom: 15px;
+}
 /* .my-login-page .card-wrapper {
 	width: 400px;
 } */
@@ -90,3 +95,31 @@ body.my-login-page {
 		padding: 15px;
 	}
 }
+.linkTable{
+	max-width: 400px;
+  }
+
+.morecontent span {
+	display:none;
+	}
+	.morelink {
+	display:block;
+	}
+	
+	.technotesDiv {
+	  inline-size: 330px;
+	  overflow-wrap: break-word;
+	}
+	a.maintenanceHistoryTable{
+	  color: rgb(0 0 0 / 90%);
+	  display: block;
+	}
+	a.maintenanceHistoryTable:hover {
+		color: rgb(0 0 0 / 90%);
+		text-decoration: none;
+		 
+		
+	}
+	/* td a.maintenanceHistoryTable { 
+		display: block; 
+	} */

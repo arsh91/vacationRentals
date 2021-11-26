@@ -2,7 +2,7 @@
 include 'db_connection.php';
 include 'inc/auth.php';
 
-if(isset($_POST['ticketnum']) && isset($_POST['notes'])){
+if(isset($_POST['ticketnum']) && isset($_POST['notes']) && isset($_POST['hoursbilled']) && isset($_POST['GuestSatisfactionLevel']) ){
     
 			
             $notes = $_POST['notes'];
@@ -10,9 +10,13 @@ if(isset($_POST['ticketnum']) && isset($_POST['notes'])){
 			$closedby = $_SESSION['user']['TeamMemberID'];
 			$closeddate = date("Y-m-d");
 			$closedtime = date("H:i:s");
+            $hoursbilled = $_POST['hoursbilled'];
+            $GuestSatisfactionLevel = $_POST['GuestSatisfactionLevel'];
+
+
 			
 			
-            $db->query("UPDATE MaintenanceTicket SET notes=?, ClosedDate=?, ClosedTime=?, ClosedBy=? WHERE TicketNum=?" , $notes, $closeddate, $closedtime, $closedby, $ticketnum);
+            $db->query("UPDATE MaintenanceTicket SET notes=?, ClosedDate=?, ClosedTime=?, ClosedBy=?, Hoursbilled=?, Guestsatisfactionlevel=? WHERE TicketNum=?" , $notes, $closeddate, $closedtime, $closedby, $hoursbilled,  $GuestSatisfactionLevel, $ticketnum);
             
             $closeddate = date("m-d-Y", strtotime($closeddate));
 			$closedtime = date("h:i A", strtotime($closedtime));
