@@ -992,7 +992,7 @@ alert(teamMemberId);
             //alert('Why did you press cancel? You should have confirmed');
         }
 
-        })
+        });
     
     });
     
