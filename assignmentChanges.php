@@ -3,7 +3,7 @@
 include 'db_connection.php';
 include 'inc/auth.php';
 
-// if ($_SESSION['user']['Admin'] == "Y") {
+if ($_SESSION['user']['Admin'] == "Y") {
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -41,6 +41,12 @@ th:first-child, td:first-child
 .inputtechNotes{
   height: 50px;
 }
+.lostErrorMsg {
+  display: none;
+  font-size: 16px;
+  text-align: center;
+  color: red;
+}
         </style>
 </head>
 <?php
@@ -59,7 +65,7 @@ $MaintenanceAssignements = $db->query('SELECT * FROM MaintenanceAssignements WHE
 $success = false;
 
 if(isset($_POST['submit'])){
-    
+
     if(isset($_POST['property'])){
 
         foreach($_POST['property'] as $prop){
@@ -127,7 +133,7 @@ if(isset($_POST['submit'])){
                                         <div class="row ml-1 mt-3 mb-3">
                                             <?php foreach($assignmentsData as $key=> $assignmentData){ ?>
                                                 <div class="form-check">
-                                                    <input class="form-check-input" name="property[<?php
+                                                    <input class="form-check-input checkbox input" name="property[<?php
                                                     echo $assignmentData['PropertyID']; ?>]" type="checkbox" value="<?php
                                                     echo $assignmentData['PropertyID'];?>" id="authorize"
                                                         >
@@ -143,6 +149,10 @@ if(isset($_POST['submit'])){
                                                 <div class="alert alert-success mt-3 text-center eta_success_msg" role="alert">MaintenanceAssignements updated successfully!</div>
                                             </div>
                                         <?php } ?>
+                                        <!-- CHECKBOX ALERT MSG -->
+                                        <div class="lostErrorMsg" >
+                                            Please select atleast any one property first
+                                        </div>
                                         <div class="assignment_table_div">
                                             <table class="table mt-4 mb-3 assignment_table">
                                                 <thead>
@@ -186,67 +196,67 @@ if(isset($_POST['submit'])){
                                                                 </td>
                                                 
                                                                 <td> 
-                                                                    <input class="inputBox"  type="number" id="contact1" name="cat[<?php echo $categoryId; ?>][c1]">   
+                                                                    <input class="inputBox input"  type="number" id="contact1" min="0" name="cat[<?php echo $categoryId; ?>][c1]">   
                                                                 </td>
                                                                 <td>
-                                                                    <input class="inputBox" type="number" id="wait1" name="cat[<?php echo $categoryId; ?>][w1]">
+                                                                    <input class="inputBox input" type="number" id="wait1" min="0" name="cat[<?php echo $categoryId; ?>][w1]">
                                                                 </td> 
                                                                 <td>
-                                                                    <input class="inputBox" type="number" id="contact2" name="cat[<?php echo $categoryId; ?>][c2]">
+                                                                    <input class="inputBox input" type="number" id="contact2" min="0" name="cat[<?php echo $categoryId; ?>][c2]">
                                                                 </td>
                                                                 <td>
-                                                                    <input class="inputBox" type="number" id="wait2" name="cat[<?php echo $categoryId; ?>][w2]">
+                                                                    <input class="inputBox input" type="number" id="wait2" min="0" name="cat[<?php echo $categoryId; ?>][w2]">
                                                                 </td>
                                                                 <td>
-                                                                    <input class="inputBox" type="number" id="contact3" name="cat[<?php echo $categoryId; ?>][c3]">
+                                                                    <input class="inputBox input" type="number" id="contact3" min="0" name="cat[<?php echo $categoryId; ?>][c3]">
                                                                 </td>
                                                                 <td>
-                                                                    <input class="inputBox" type="number" id="wait3" name="cat[<?php echo $categoryId; ?>][w3]">
+                                                                    <input class="inputBox input" type="number" id="wait3" min="0"  name="cat[<?php echo $categoryId; ?>][w3]">
                                                                 </td>
                                                                 <td>
-                                                                    <input class="inputBox" type="number" id="contact4" name="cat[<?php echo $categoryId; ?>][c4]">
+                                                                    <input class="inputBox input" type="number" id="contact4" min="0" name="cat[<?php echo $categoryId; ?>][c4]">
                                                                 </td>
                                                                 <td>
-                                                                    <input class="inputBox" type="number" id="wait4" name="cat[<?php echo $categoryId; ?>][w4]">
+                                                                    <input class="inputBox input" type="number" id="wait4" min="0" name="cat[<?php echo $categoryId; ?>][w4]">
                                                                 </td>
                                                                 <td>
-                                                                    <input class="inputBox" type="number" id="contact5" name="cat[<?php echo $categoryId; ?>][c5]">
+                                                                    <input class="inputBox input" type="number" id="contact5" min="0" name="cat[<?php echo $categoryId; ?>][c5]">
                                                                 </td>
                                                                 <td>
-                                                                    <input class="inputBox" type="number" id="wait5" name="cat[<?php echo $categoryId; ?>][w5]">
+                                                                    <input class="inputBox input" type="number" id="wait5" min="0" name="cat[<?php echo $categoryId; ?>][w5]">
                                                                 </td>
                                                                 <td>
-                                                                    <input class="inputBox" type="number" id="contact6" name="cat[<?php echo $categoryId; ?>][c6]">
+                                                                    <input class="inputBox input" type="number" id="contact6" min="0" name="cat[<?php echo $categoryId; ?>][c6]">
                                                                 </td>
                                                                 <td>
-                                                                    <input class="inputBox" type="number" id="wait6" name="cat[<?php echo $categoryId; ?>][w6]">
+                                                                    <input class="inputBox input" type="number" id="wait6" min="0" name="cat[<?php echo $categoryId; ?>][w6]">
                                                                 </td>
                                                                 <td>
-                                                                    <input class="inputBox" type="number" id="contact7" name="cat[<?php echo $categoryId; ?>][c7]">
+                                                                    <input class="inputBox input" type="number" id="contact7" min="0"  name="cat[<?php echo $categoryId; ?>][c7]">
                                                                 </td>
                                                                 <td>
-                                                                    <input class="inputBox" type="number" id="wait7" name="cat[<?php echo $categoryId; ?>][w7]">
+                                                                    <input class="inputBox input" type="number" id="wait7" min="0" name="cat[<?php echo $categoryId; ?>][w7]">
                                                                 </td>
                                                                 <td>
-                                                                    <input class="inputBox" type="number" id="contact8" name="cat[<?php echo $categoryId; ?>][c8]">
+                                                                    <input class="inputBox input" type="number" id="contact8" min="0" name="cat[<?php echo $categoryId; ?>][c8]">
                                                                 </td>
                                                                 <td>
-                                                                    <input class="inputBox" type="number" id="wait8" name="cat[<?php echo $categoryId; ?>][w8]">
+                                                                    <input class="inputBox input" type="number" id="wait8" min="0" name="cat[<?php echo $categoryId; ?>][w8]">
                                                                 </td>
                                                                 <td>
-                                                                    <input class="inputBox" type="number" id="contact9" name="cat[<?php echo $categoryId; ?>][c9]">
+                                                                    <input class="inputBox input" type="number" id="contact9" min="0" name="cat[<?php echo $categoryId; ?>][c9]">
                                                                 </td>
                                                                 <td>
-                                                                    <input class="inputBox" type="number" id="wait9" name="cat[<?php echo $categoryId; ?>][w9]">
+                                                                    <input class="inputBox input" type="number" id="wait9" min="0" name="cat[<?php echo $categoryId; ?>][w9]">
                                                                 </td>
                                                                 <td>
-                                                                    <input class="inputBox" type="number" id="contact10" name="cat[<?php echo $categoryId; ?>][c10]">
+                                                                    <input class="inputBox input" type="number" id="contact10" min="0" name="cat[<?php echo $categoryId; ?>][c10]">
                                                                 </td>
                                                                 <td>
-                                                                    <input class="inputBox" type="number" id="wait10" name="cat[<?php echo $categoryId; ?>][w10]">
+                                                                    <input class="inputBox input" type="number" id="wait10" min="0" name="cat[<?php echo $categoryId; ?>][w10]">
                                                                 </td>
                                                                 <td>
-                                                                    <input class="inputtechNotes" type="text" id="techNotes" name="cat[<?php echo $categoryId; ?>][technotes]">
+                                                                    <input class="inputtechNotes input" type="text" id="techNotes" name="cat[<?php echo $categoryId; ?>][technotes]">
                                                                 </td>
 
                                                             
@@ -302,7 +312,23 @@ setTimeout(() => {
     return false;
     });
 
+    $('.input').click( function() {
+
+        var checkboxVal = $("input[type=checkbox]:checked").length;
+
+     if(!checkboxVal) {
+         $('.lostErrorMsg').show();
+     } else{
+        $('.lostErrorMsg').hide();
+
+     }
+    });
+
 });
 </script>
 
 </html>
+<?php } else {
+         header('Location: maintainence_tickets.php');
+
+}?>

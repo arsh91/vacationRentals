@@ -46,6 +46,10 @@ include 'inc/auth.php';
 .morelink {
   display:block;
 }
+.lostErrorMsg {
+  font-size: 16px;
+  text-align: center;
+}
 </style>
 
 <body class="my-login-page">
@@ -216,7 +220,7 @@ include 'inc/auth.php';
                         aria-labelledby="submitModalLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
-                                <form method="POST" action="closed_tickets.php" class="closeTicketForm">
+                                <form method="POST" action="" class="closeTicketForm needs-validation"  novalidate>
                                     <div class="modal-header">
                                         <h5 class="modal-title" id="submitModalLabel"><strong>NOTES</strong></h5>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -225,7 +229,7 @@ include 'inc/auth.php';
                                     </div>
                                     <div class="modal-body">
                                         <div class="form-group">
-                                            <label for="message-text" class="col-form-label">Notes:</label>
+                                            <label for="message-text" class="col-form-label"><strong>Notes:</strong></label>
                                             <textarea class="form-control" name="notes" id="notes" maxlength="250"
                                                 placeholder="Enter your notes" required></textarea>
                                             <div class="notes_text text-right"><span id="textarea_lenght">250</span>
@@ -235,7 +239,7 @@ include 'inc/auth.php';
                                         </div>
                                         <div class="form-group">
                                             <label for="Hours-Billed" class="col-form-label"><strong>Hours Billed for Job:</strong></label>
-                                            <input class="form-control" type="number" step="0.01" id="hoursbilled" name="hoursbilled">
+                                            <input class="form-control" type="number" step="0.01" id="hoursbilled" name="hoursbilled" required>
                                         </div>
                                         <div class="form-group">
                                             <label for="Guest-Satisfaction-Level" class="col-form-label"><strong>Guest Satisfaction Level:</strong></label>
@@ -255,7 +259,7 @@ include 'inc/auth.php';
                                             </div>
                                             <div class="form-check">
                                                 <input
-                                                class="form-check-input GuestSatisfactionLevel" type="radio" value=" Guest_dissatisfied_with_resolution_other issues"
+                                                class="form-check-input GuestSatisfactionLevel" type="radio" value=" Guest_dissatisfied_with_resolution_other_issues"
                                                 name="Guest_Satisfaction_Level_radio" id="Guest_Satisfaction_Level_radio3" required>
                                                 <label class="form-check-label" for="Guest_Satisfaction_Level_radio3">The Guest was dissatisfied with this resolution and/or other issues
                                                 </label>
@@ -266,6 +270,10 @@ include 'inc/auth.php';
                                                 name="Guest_Satisfaction_Level_radio" id="Guest_Satisfaction_Level_radio4" required>
                                                 <label class="form-check-label" for="Guest_Satisfaction_Level_radio4">I’m not certain of the Guest’s satisfaction level
                                                 </label>
+
+                                                <div class="invalid-feedback lostErrorMsg mt-3">
+                                                    Please correct the errors above that are highlighted in red
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -512,13 +520,42 @@ include 'inc/auth.php';
         };
         $('.closedbutton').unbind('click').bind('click', closedbutton);
 
+                // Form Validation 
 
-        $('.closeTicketForm').on('submit', (function(e) {
+            // Example starter JavaScript for disabling form submissions if there are invalid fields
+            (function () {
+            'use strict'
+
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                var forms = document.querySelectorAll('.needs-validation')
+
+                // Loop over them and prevent submission
+                Array.prototype.slice.call(forms)
+                    .forEach(function (form) {
+                        form.addEventListener('submit', function (event) {
+                           
+                            if (!form.checkValidity()) {
+                                $('.lostErrorMsg').show();
+                                event.preventDefault()
+                                event.stopPropagation()
+                            }            
+                           else {
+                                $('.lostErrorMsg').hide();
+                                submitCloseTicket(event);
+                           }
+                            form.classList.add('was-validated')
+                        }, false)
+                    })
+            })()
+
+        function submitCloseTicket(e) {
             e.preventDefault();
+            // alert("test");
             var ticketid = $('input[name="ticketnum"]').val();
             var notes = $('textarea#notes').val();
-            var GuestSatisfactionLevel = $('input[name="Guest_Satisfaction_Level_radio"]').val();
+            var GuestSatisfactionLevel = $('input[name="Guest_Satisfaction_Level_radio"]:checked').val();
             var hoursbilled = $('#hoursbilled').val();
+            // alert(GuestSatisfactionLevel);
            
             $.ajax({
                 type: "POST",
@@ -534,11 +571,12 @@ include 'inc/auth.php';
                     if (response.close_date) {
                         $('.closeddatebutton-' + ticketid).html(response
                             .close_date + " " + response.closed_time);
+                            $('#submitModal').modal("hide");
+
                     }
                 }
             });
-            $('#submitModal').modal("hide");
-        }));
+        };
             
         function openTicketDetailModal() {
             var ticketId = $(this).closest('tr').attr('data-ticketId');
@@ -671,9 +709,6 @@ include 'inc/auth.php';
                     $('.category').unbind('change').bind('change', category);
 
 
-
-
-
                 }
 
             });
@@ -699,6 +734,8 @@ include 'inc/auth.php';
         }; 
         $('.category').unbind('change').bind('change', category);
 
+ 
+    
         
     });
     </script>
