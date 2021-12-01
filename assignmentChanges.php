@@ -135,7 +135,7 @@ if(isset($_POST['submit'])){
                                                 <div class="form-check">
                                                     <input class="form-check-input checkbox input" name="property[<?php
                                                     echo $assignmentData['PropertyID']; ?>]" type="checkbox" value="<?php
-                                                    echo $assignmentData['PropertyID'];?>" id="authorize"
+                                                    echo $assignmentData['PropertyID'];?>" id="propertycheckbox"
                                                         >
                                                     <label class="form-check-label me-2" for="authorize"><?php
                                                     echo $assignmentData['PropertyName']; ?></label><br>                                        
@@ -154,7 +154,7 @@ if(isset($_POST['submit'])){
                                             Please select atleast any one property first
                                         </div>
                                         <div class="assignment_table_div">
-                                            <table class="table mt-4 mb-3 assignment_table">
+                                            <table class="table mt-4 mb-3 assignment_table" id="assignment_table">
                                                 <thead>
                                                     <tr>
                                                         <th>For these assignments:</th>
@@ -181,7 +181,7 @@ if(isset($_POST['submit'])){
                                                         <th>Tech Notes</th>
                                                     </tr>
                                                 </thead>
-                                                <tbody>
+                                                <tbody class="assignment_tbody">
                                                     <?php foreach($categoriesData as  $key =>$categoryData) {
                                                         if (strpos($categoryData['Category'], "------")  === false) {  
                                                     ?>
@@ -196,67 +196,67 @@ if(isset($_POST['submit'])){
                                                                 </td>
                                                 
                                                                 <td> 
-                                                                    <input class="inputBox input"  type="number" id="contact1" min="0" name="cat[<?php echo $categoryId; ?>][c1]">   
+                                                                    <input class="inputBox input"  type="number" id="<?php echo $categoryId; ?>-c1" min="0" name="cat[<?php echo $categoryId; ?>][c1]">   
                                                                 </td>
                                                                 <td>
-                                                                    <input class="inputBox input" type="number" id="wait1" min="0" name="cat[<?php echo $categoryId; ?>][w1]">
+                                                                    <input class="inputBox input" type="number" id="<?php echo $categoryId; ?>-w1" min="0" name="cat[<?php echo $categoryId; ?>][w1]">
                                                                 </td> 
                                                                 <td>
-                                                                    <input class="inputBox input" type="number" id="contact2" min="0" name="cat[<?php echo $categoryId; ?>][c2]">
+                                                                    <input class="inputBox input" type="number" id="<?php echo $categoryId; ?>-c2" min="0" name="cat[<?php echo $categoryId; ?>][c2]">
                                                                 </td>
                                                                 <td>
-                                                                    <input class="inputBox input" type="number" id="wait2" min="0" name="cat[<?php echo $categoryId; ?>][w2]">
+                                                                    <input class="inputBox input" type="number" id="<?php echo $categoryId; ?>-w2" min="0" name="cat[<?php echo $categoryId; ?>][w2]">
                                                                 </td>
                                                                 <td>
-                                                                    <input class="inputBox input" type="number" id="contact3" min="0" name="cat[<?php echo $categoryId; ?>][c3]">
+                                                                    <input class="inputBox input" type="number" id="<?php echo $categoryId; ?>-c3" min="0" name="cat[<?php echo $categoryId; ?>][c3]">
                                                                 </td>
                                                                 <td>
-                                                                    <input class="inputBox input" type="number" id="wait3" min="0"  name="cat[<?php echo $categoryId; ?>][w3]">
+                                                                    <input class="inputBox input" type="number" id="<?php echo $categoryId; ?>-w3" min="0"  name="cat[<?php echo $categoryId; ?>][w3]">
                                                                 </td>
                                                                 <td>
-                                                                    <input class="inputBox input" type="number" id="contact4" min="0" name="cat[<?php echo $categoryId; ?>][c4]">
+                                                                    <input class="inputBox input" type="number" id="<?php echo $categoryId; ?>-c4" min="0" name="cat[<?php echo $categoryId; ?>][c4]">
                                                                 </td>
                                                                 <td>
-                                                                    <input class="inputBox input" type="number" id="wait4" min="0" name="cat[<?php echo $categoryId; ?>][w4]">
+                                                                    <input class="inputBox input" type="number" id="<?php echo $categoryId; ?>-w4" min="0" name="cat[<?php echo $categoryId; ?>][w4]">
                                                                 </td>
                                                                 <td>
-                                                                    <input class="inputBox input" type="number" id="contact5" min="0" name="cat[<?php echo $categoryId; ?>][c5]">
+                                                                    <input class="inputBox input" type="number" id="<?php echo $categoryId; ?>-c5" min="0" name="cat[<?php echo $categoryId; ?>][c5]">
                                                                 </td>
                                                                 <td>
-                                                                    <input class="inputBox input" type="number" id="wait5" min="0" name="cat[<?php echo $categoryId; ?>][w5]">
+                                                                    <input class="inputBox input" type="number" id="<?php echo $categoryId; ?>-w5" min="0" name="cat[<?php echo $categoryId; ?>][w5]">
                                                                 </td>
                                                                 <td>
-                                                                    <input class="inputBox input" type="number" id="contact6" min="0" name="cat[<?php echo $categoryId; ?>][c6]">
+                                                                    <input class="inputBox input" type="number" id="<?php echo $categoryId; ?>-c6" min="0" name="cat[<?php echo $categoryId; ?>][c6]">
                                                                 </td>
                                                                 <td>
-                                                                    <input class="inputBox input" type="number" id="wait6" min="0" name="cat[<?php echo $categoryId; ?>][w6]">
+                                                                    <input class="inputBox input" type="number" id="<?php echo $categoryId; ?>-w6" min="0" name="cat[<?php echo $categoryId; ?>][w6]">
                                                                 </td>
                                                                 <td>
-                                                                    <input class="inputBox input" type="number" id="contact7" min="0"  name="cat[<?php echo $categoryId; ?>][c7]">
+                                                                    <input class="inputBox input" type="number" id="<?php echo $categoryId; ?>-c7" min="0"  name="cat[<?php echo $categoryId; ?>][c7]">
                                                                 </td>
                                                                 <td>
-                                                                    <input class="inputBox input" type="number" id="wait7" min="0" name="cat[<?php echo $categoryId; ?>][w7]">
+                                                                    <input class="inputBox input" type="number" id="<?php echo $categoryId; ?>-w7" min="0" name="cat[<?php echo $categoryId; ?>][w7]">
                                                                 </td>
                                                                 <td>
-                                                                    <input class="inputBox input" type="number" id="contact8" min="0" name="cat[<?php echo $categoryId; ?>][c8]">
+                                                                    <input class="inputBox input" type="number" id="<?php echo $categoryId; ?>-c8" min="0" name="cat[<?php echo $categoryId; ?>][c8]">
                                                                 </td>
                                                                 <td>
-                                                                    <input class="inputBox input" type="number" id="wait8" min="0" name="cat[<?php echo $categoryId; ?>][w8]">
+                                                                    <input class="inputBox input" type="number" id="<?php echo $categoryId; ?>-w8" min="0" name="cat[<?php echo $categoryId; ?>][w8]">
                                                                 </td>
                                                                 <td>
-                                                                    <input class="inputBox input" type="number" id="contact9" min="0" name="cat[<?php echo $categoryId; ?>][c9]">
+                                                                    <input class="inputBox input" type="number" id="<?php echo $categoryId; ?>-c9" min="0" name="cat[<?php echo $categoryId; ?>][c9]">
                                                                 </td>
                                                                 <td>
-                                                                    <input class="inputBox input" type="number" id="wait9" min="0" name="cat[<?php echo $categoryId; ?>][w9]">
+                                                                    <input class="inputBox input" type="number" id="<?php echo $categoryId; ?>-w9" min="0" name="cat[<?php echo $categoryId; ?>][w9]">
                                                                 </td>
                                                                 <td>
-                                                                    <input class="inputBox input" type="number" id="contact10" min="0" name="cat[<?php echo $categoryId; ?>][c10]">
+                                                                    <input class="inputBox input" type="number" id="<?php echo $categoryId; ?>-c10" min="0" name="cat[<?php echo $categoryId; ?>][c10]">
                                                                 </td>
                                                                 <td>
-                                                                    <input class="inputBox input" type="number" id="wait10" min="0" name="cat[<?php echo $categoryId; ?>][w10]">
+                                                                    <input class="inputBox input" type="number" id="<?php echo $categoryId; ?>-w10" min="0" name="cat[<?php echo $categoryId; ?>][w10]">
                                                                 </td>
                                                                 <td>
-                                                                    <input class="inputtechNotes input" type="text" id="techNotes" name="cat[<?php echo $categoryId; ?>][technotes]">
+                                                                    <input class="inputtechNotes input" type="text" id="<?php echo $categoryId; ?>-technotes" name="cat[<?php echo $categoryId; ?>][technotes]">
                                                                 </td>
 
                                                             
@@ -305,6 +305,12 @@ setTimeout(() => {
     //submit confirmation
     
     $('#assigmnetsChanges').on('submit', function() {
+        var checkboxVal = $("input[type=checkbox]:checked").length;
+        if(!checkboxVal){
+            $('.lostErrorMsg').show();
+            alert("Please select atleast one property");
+            return false;
+        }
     if(confirm('Do you really want to update the Maintenance Assignments Data?')) {
         return true;
     }
@@ -322,6 +328,97 @@ setTimeout(() => {
         $('.lostErrorMsg').hide();
 
      }
+    });
+
+    $(".checkbox").click(function(){
+        if ($(this).is(":checked")){
+           var propertyId = $(this).val();
+            
+           $.ajax({
+                type: "POST",
+                url: "assignment_selected_data.php",
+                data: {
+                    'propertyId': propertyId
+                    
+                },
+                success: function(response) {
+                    var response = JSON.parse(response);
+                    var assignment =response.assignmentsData;
+                   $(".inputBox").val(0);
+                    $.each(response.assignmentsData, function(index, value){
+                      //console.log(value);
+                      var categoryFieldName = value.CategoryID+"c";
+                    //console.log(typeof value.Contact1);
+                      if(value.Contact1 != "NULL"){
+                        $('#'+value.CategoryID+'-c1').val(value.Contact1);
+                      }
+                      if(value.Contact2 != "NULL"){
+                        $('#'+value.CategoryID+'-c2').val(value.Contact2);
+                      }
+                      if(value.Contact3 != "NULL"){
+                        $('#'+value.CategoryID+'-c3').val(value.Contact3);
+                      }
+                      if(value.Contact4 != "NULL"){
+                        $('#'+value.CategoryID+'-c4').val(value.Contact4);
+                      }
+                      if(value.Contact5 != "NULL"){
+                        $('#'+value.CategoryID+'-c5').val(value.Contact5);
+                      }
+                      if(value.Contact6 != "NULL"){
+                        $('#'+value.CategoryID+'-c6').val(value.Contact6);
+                      }
+                      if(value.Contact7 != "NULL"){
+                        $('#'+value.CategoryID+'-c7').val(value.Contact7);
+                      }
+                      if(value.Contact8 != "NULL"){
+                        $('#'+value.CategoryID+'-c8').val(value.Contact8);
+                      }
+                      if(value.Contact9 != "NULL"){
+                        $('#'+value.CategoryID+'-c9').val(value.Contact9);
+                      }
+                      if(value.Contact10 != "NULL"){
+                        $('#'+value.CategoryID+'-c10').val(value.Contact10);
+                      }
+
+                      // WAIT fields
+                      if(value.Wait1 != "NULL"){
+                        $('#'+value.CategoryID+'-w1').val(value.Wait1);
+                      }
+                      if(value.Wait2 != "NULL"){
+                        $('#'+value.CategoryID+'-w2').val(value.Wait2);
+                      }
+                      if(value.Wait3 != "NULL"){
+                        $('#'+value.CategoryID+'-w3').val(value.Wait3);
+                      }
+                      if(value.Wait4 != "NULL"){
+                        $('#'+value.CategoryID+'-w4').val(value.Wait4);
+                      }
+                      if(value.Wait5 != "NULL"){
+                        $('#'+value.CategoryID+'-w5').val(value.Wait5);
+                      }
+                      if(value.Wait6 != "NULL"){
+                        $('#'+value.CategoryID+'-w6').val(value.Wait6);
+                      }
+                      if(value.Wait7 != "NULL"){
+                        $('#'+value.CategoryID+'-w7').val(value.Wait7);
+                      }
+                      if(value.Wait8 != "NULL"){
+                        $('#'+value.CategoryID+'-w8').val(value.Wait8);
+                      }
+                      if(value.Wait9 != "NULL"){
+                        $('#'+value.CategoryID+'-w9').val(value.Wait9);
+                      }
+                      if(value.Wait10 != "NULL"){
+                        $('#'+value.CategoryID+'-w10').val(value.Wait10);
+                      }
+
+                      $('#'+value.CategoryID+'-technotes').val(value.technotes);
+                    });
+
+                }
+            });
+        }
+       
     });
 
 });
