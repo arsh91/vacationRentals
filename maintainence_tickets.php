@@ -507,6 +507,9 @@ include 'inc/auth.php';
         function closedbutton() {
 
             $('textarea#notes').val('');
+            $('#hoursbilled').val('');
+            $('input[name="Guest_Satisfaction_Level_radio"]').prop('checked', false);
+            $('.closeTicketForm').removeClass('was-validated');
 
             if (confirm(
                     'If the Guest is satisfied and this ticket is complete, click OK to close this ticket. \r\n If the ticket is incomplete, click cancel to leave the ticket open.'

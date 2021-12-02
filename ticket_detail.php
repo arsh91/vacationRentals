@@ -84,7 +84,7 @@ $eta_custom_date = $eta_custom_time = '';
         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <form method="POST" action="" id="notesform" class="needs-validation" novalidate>
+                <form method="POST" action="" id="notesform" class="closeTicketForm needs-validation" novalidate>
                     <div class="modal-header">
                         <h5 class="modal-title" id="submitModalLabel">NOTES</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -987,6 +987,13 @@ $eta_custom_date = $eta_custom_time = '';
 
         //Close Ticket
         $('#ticketClose').click(function () {
+            $('textarea#notes').val('');
+            $('#hoursbilled').val('');
+            $('input[name="Guest_Satisfaction_Level_radio"]').prop('checked', false);
+            $('.closeTicketForm').removeClass('was-validated');
+            $('.lostErrorMsg').hide();
+
+
 
         if (confirm('If the Guest is satisfied and this ticket is complete, click OK to close this ticket. \r\n If the ticket is incomplete, click cancel to leave the ticket open.')) {
             $('#submitModal').modal("show");
