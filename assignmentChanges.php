@@ -12,50 +12,54 @@ if ($_SESSION['user']['Admin'] == "Y") {
     <meta charset="utf-8">
     <meta name="author" content="Kodinger">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>We Care || Assignment Changes</title>
+    <title>Assignment Changes</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="css/my-login.css">   
+    <link rel="stylesheet" type="text/css" href="css/my-login.css">
 
-<style>
-th:first-child, td:first-child
-{
-  position:sticky;
-  left:0px;
-  background-color:#dee2e6;
-}
-.form-check-label {
-  margin-right: 25px;
-}
+    <style>
+    th:first-child,
+    td:first-child {
+        position: sticky;
+        left: 0px;
+        background-color: #dee2e6;
+    }
 
-.assignment_table_div{
-  max-height: 100%;
-  max-width: 100%;
-  overflow: hidden;
-  overflow-x: scroll;
-  margin-bottom: 15px;
-}
-.inputBox{
-  width: 50px;
-}
-.inputtechNotes{
-  height: 50px;
-}
-.lostErrorMsg {
-  display: none;
-  font-size: 16px;
-  text-align: center;
-  color: red;
-}
-        </style>
+    .form-check-label {
+        margin-right: 25px;
+    }
+
+    .assignment_table_div {
+        max-height: 100%;
+        max-width: 100%;
+        overflow: hidden;
+        overflow-x: scroll;
+        margin-bottom: 15px;
+    }
+
+    .inputBox {
+        width: 50px;
+    }
+
+    .inputtechNotes {
+        height: 50px;
+    }
+
+    .lostErrorMsg {
+        display: none;
+        font-size: 16px;
+        text-align: center;
+        color: red;
+    }
+    </style>
 </head>
 <?php
  //FECTH DISTINCT PROPERTY DATA FROM MAINTENANCE ASSIGNMENTS
-$assignmentsData = $db->query('SELECT DISTINCT  PropertyID, PropertyName FROM MaintenanceAssignements')->fetchAll(); 
+$assignmentsData = $db->query('SELECT DISTINCT  PropertyID, PropertyName FROM MaintenanceAssignements WHERE PropertyID IS NOT NULL')->fetchAll(); 
 
 
 //FECTH DISTINCT CATEGORY DATA FROM MAINTENANCE ASSIGNMENTS
-$categoriesData = $db->query('SELECT DISTINCT CategoryID, Category FROM MaintenanceAssignements')->fetchAll(); 
+$categoriesData = $db->query('SELECT DISTINCT CategoryID, Category FROM MaintenanceAssignements WHERE Category != ""')->fetchAll(); 
 
 
 //FECTH CONTACT,WAIT,TECNOTES DATA FROM MAINTENANCE ASSIGNMENTS
@@ -109,35 +113,38 @@ if(isset($_POST['submit'])){
 }
 
 ?>
+
 <body>
-   
+
     <section class="driver_form m-4">
         <div class="container">
             <div class="row justify-content-md-center align-items-center h-100">
                 <div class="card_wrapper ">
                     <div class="brand text-center mb-4">
-                        <a href="/"><img src="img/wecarelogo.png" alt="We Care" width="150px"></a>
+                        <a href="/"> <img src="img/logo.png" alt="Vacation Rental Management"></a>
                     </div>
                     <form method="POST" name="assigmnetsChanges" action="" id="assigmnetsChanges">
                         <div class="card col-md-12 m-auto p-0" style="width: 1350px;">
                             <div class="card-header">
-                                
+
                             </div>
                             <div class="card-body">
                                 <div class="drivers_det">
                                     <div class="form-group">
-                                      
-                                       <h5>Change Maintenance Assignments 
-                                        for these properties:
-                                        </h5> 
+
+                                        <h5>Change Maintenance Assignments
+                                            for these properties:
+                                        </h5>
                                         <div class="row ml-1 mt-3 mb-3">
                                             <?php foreach($assignmentsData as $key=> $assignmentData){ ?>
                                                 <div class="form-check">
                                                     <input class="form-check-input checkbox input" name="property[<?php
                                                     echo $assignmentData['PropertyID']; ?>]" type="checkbox" value="<?php
-                                                    echo $assignmentData['PropertyID'];?>" id="propertycheckbox"
+                                                    echo $assignmentData['PropertyID'];?>" id="propertycheckbox-<?php
+                                                    echo $assignmentData['PropertyID'];?>"
                                                         >
-                                                    <label class="form-check-label me-2" for="authorize"><?php
+                                                    <label class="form-check-label me-2" for="propertycheckbox-<?php
+                                                    echo $assignmentData['PropertyID'];?>"><?php
                                                     echo $assignmentData['PropertyName']; ?></label><br>                                        
                                                 </div>
                                             <?php } ?>
@@ -150,11 +157,11 @@ if(isset($_POST['submit'])){
                                             </div>
                                         <?php } ?>
                                         <!-- CHECKBOX ALERT MSG -->
-                                        <div class="lostErrorMsg" >
+                                        <div class="lostErrorMsg">
                                             Please select atleast any one property first
                                         </div>
                                         <div class="assignment_table_div">
-                                            <table class="table mt-4 mb-3 assignment_table" id="assignment_table">
+                                            <table class="table mt-4 mb-3 assignment_table">
                                                 <thead>
                                                     <tr>
                                                         <th>For these assignments:</th>
@@ -177,11 +184,11 @@ if(isset($_POST['submit'])){
                                                         <th>Contact9</th>
                                                         <th>Wait9</th>
                                                         <th>Contact10</th>
-                                                        <th>Wait10</th> 
+                                                        <th>Wait10</th>
                                                         <th>Tech Notes</th>
                                                     </tr>
                                                 </thead>
-                                                <tbody class="assignment_tbody">
+                                                <tbody>
                                                     <?php foreach($categoriesData as  $key =>$categoryData) {
                                                         if (strpos($categoryData['Category'], "------")  === false) {  
                                                     ?>
@@ -295,15 +302,15 @@ if(isset($_POST['submit'])){
 </body>
 <script type="text/javascript">
 $(document).ready(function() {
-    
-// Append the Alert Box 
-setTimeout(() => {
+
+    // Append the Alert Box 
+    setTimeout(() => {
         $('.success_box').fadeOut('slow');
     }, 2000);
 
 
     //submit confirmation
-    
+
     $('#assigmnetsChanges').on('submit', function() {
         var checkboxVal = $("input[type=checkbox]:checked").length;
         if(!checkboxVal){
@@ -349,66 +356,66 @@ setTimeout(() => {
                       //console.log(value);
                       var categoryFieldName = value.CategoryID+"c";
                     //console.log(typeof value.Contact1);
-                      if(value.Contact1 != "NULL"){
+                      if(value.Contact1 != "NULL" && value.Contact1){
                         $('#'+value.CategoryID+'-c1').val(value.Contact1);
                       }
-                      if(value.Contact2 != "NULL"){
+                      if(value.Contact2 != "NULL" && value.Contact2){
                         $('#'+value.CategoryID+'-c2').val(value.Contact2);
                       }
-                      if(value.Contact3 != "NULL"){
+                      if(value.Contact3 != "NULL" && value.Contact3){
                         $('#'+value.CategoryID+'-c3').val(value.Contact3);
                       }
-                      if(value.Contact4 != "NULL"){
+                      if(value.Contact4 != "NULL" && value.Contact4){
                         $('#'+value.CategoryID+'-c4').val(value.Contact4);
                       }
-                      if(value.Contact5 != "NULL"){
+                      if(value.Contact5 != "NULL" && value.Contact5){
                         $('#'+value.CategoryID+'-c5').val(value.Contact5);
                       }
-                      if(value.Contact6 != "NULL"){
+                      if(value.Contact6 != "NULL" && value.Contact6){
                         $('#'+value.CategoryID+'-c6').val(value.Contact6);
                       }
-                      if(value.Contact7 != "NULL"){
+                      if(value.Contact7 != "NULL" && value.Contact7){
                         $('#'+value.CategoryID+'-c7').val(value.Contact7);
                       }
-                      if(value.Contact8 != "NULL"){
+                      if(value.Contact8 != "NULL" && value.Contact8){
                         $('#'+value.CategoryID+'-c8').val(value.Contact8);
                       }
-                      if(value.Contact9 != "NULL"){
+                      if(value.Contact9 != "NULL" && value.Contact9){
                         $('#'+value.CategoryID+'-c9').val(value.Contact9);
                       }
-                      if(value.Contact10 != "NULL"){
+                      if(value.Contact10 != "NULL" && value.Contact10){
                         $('#'+value.CategoryID+'-c10').val(value.Contact10);
                       }
 
                       // WAIT fields
-                      if(value.Wait1 != "NULL"){
+                      if(value.Wait1 != "NULL" && value.Wait1){
                         $('#'+value.CategoryID+'-w1').val(value.Wait1);
                       }
-                      if(value.Wait2 != "NULL"){
+                      if(value.Wait2 != "NULL" && value.Wait2){
                         $('#'+value.CategoryID+'-w2').val(value.Wait2);
                       }
-                      if(value.Wait3 != "NULL"){
+                      if(value.Wait3 != "NULL" && value.Wait3){
                         $('#'+value.CategoryID+'-w3').val(value.Wait3);
                       }
-                      if(value.Wait4 != "NULL"){
+                      if(value.Wait4 != "NULL" && value.Wait4){
                         $('#'+value.CategoryID+'-w4').val(value.Wait4);
                       }
-                      if(value.Wait5 != "NULL"){
+                      if(value.Wait5 != "NULL" && value.Wait5){
                         $('#'+value.CategoryID+'-w5').val(value.Wait5);
                       }
-                      if(value.Wait6 != "NULL"){
+                      if(value.Wait6 != "NULL" && value.Wait6){
                         $('#'+value.CategoryID+'-w6').val(value.Wait6);
                       }
-                      if(value.Wait7 != "NULL"){
+                      if(value.Wait7 != "NULL" && value.Wait7){
                         $('#'+value.CategoryID+'-w7').val(value.Wait7);
                       }
-                      if(value.Wait8 != "NULL"){
+                      if(value.Wait8 != "NULL" && value.Wait8){
                         $('#'+value.CategoryID+'-w8').val(value.Wait8);
                       }
-                      if(value.Wait9 != "NULL"){
+                      if(value.Wait9 != "NULL" && value.Wait9){
                         $('#'+value.CategoryID+'-w9').val(value.Wait9);
                       }
-                      if(value.Wait10 != "NULL"){
+                      if(value.Wait10 != "NULL" && value.Wait10){
                         $('#'+value.CategoryID+'-w10').val(value.Wait10);
                       }
 
@@ -426,6 +433,6 @@ setTimeout(() => {
 
 </html>
 <?php } else {
-         header('Location: maintainence_tickets.php');
+         //header('Location: maintainence_tickets.php');
 
 }?>

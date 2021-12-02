@@ -803,7 +803,7 @@ $eta_custom_date = $eta_custom_time = '';
         };
         $('input[name=eta_radio]').click(function() {
             var teamMemberId = $('.teammember').attr('teamMemberId');
-alert(teamMemberId);
+//alert(teamMemberId);
             $("input[type=radio][name=unable_resolve_eta_radio]").prop('checked', false);
             $("input[type=radio][name=custom_eta_radio]").prop('checked', false);
             $('.custom_field').hide();

@@ -355,7 +355,7 @@ include 'inc/auth.php';
 							if(count($assignments) > 0) {
                             	foreach($assignments as $val) {
                         ?>
-                            <tr class="row_data" data-ticketId="<?php echo $val['TicketNum']; ?>" data-teamMembersNo="<?php echo $teamMembersNo; ?>" data-admin="<?php echo $admin; ?>">
+                            <tr class="row_data" data-ticketId="<?php echo $val['TicketNum']; ?>" data-teamMembersNo="<?php echo $teamMembersNo; ?>">
                                 <td class="openTicketDetailModal"><?php echo $val['Property']; ?></td>
                                 <td class="openTicketDetailModal"><?php echo $val['Urgency']; ?></td>
                                 <td class="openTicketDetailModal">
@@ -513,14 +513,14 @@ include 'inc/auth.php';
                 )) {
                 var userupdid = $(this).attr('data-id');
                 $('input[name="ticketnum"]').val(userupdid);
+                $('input#hoursbilled').val('');
                 $('#submitModal').modal("show");
             } else {
 
             }
         };
         $('.closedbutton').unbind('click').bind('click', closedbutton);
-
-                // Form Validation 
+ 		// Form Validation 
 
             // Example starter JavaScript for disabling form submissions if there are invalid fields
             (function () {
@@ -709,6 +709,9 @@ include 'inc/auth.php';
                     $('.category').unbind('change').bind('change', category);
 
 
+
+
+
                 }
 
             });
@@ -734,8 +737,6 @@ include 'inc/auth.php';
         }; 
         $('.category').unbind('change').bind('change', category);
 
- 
-    
         
     });
     </script>
