@@ -2,8 +2,8 @@
 include 'db_connection.php';
 include 'inc/auth.php';
 
-if(isset($_POST['ticketnum']) && isset($_POST['notes']) && isset($_POST['hoursbilled']) && isset($_POST['GuestSatisfactionLevel']) ){
-    
+if(isset($_POST['ticketnum']) && isset($_POST['notes']) && !empty($_POST['notes']) && isset($_POST['hoursbilled']) && !empty($_POST['hoursbilled']) && isset($_POST['GuestSatisfactionLevel']) && !empty($_POST['GuestSatisfactionLevel']) ){
+    // print_r($_POST);die();
 			
             $notes = $_POST['notes'];
 			$ticketnum = $_POST['ticketnum'];

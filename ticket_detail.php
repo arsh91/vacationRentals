@@ -84,7 +84,7 @@ $eta_custom_date = $eta_custom_time = '';
         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <form method="POST" action="" id="notesform">
+                <form method="POST" action="" id="notesform" class="needs-validation" novalidate>
                     <div class="modal-header">
                         <h5 class="modal-title" id="submitModalLabel">NOTES</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -103,7 +103,7 @@ $eta_custom_date = $eta_custom_time = '';
                         </div>
                         <div class="form-group">
                             <label for="Hours-Billed" class="col-form-label"><strong>Hours Billed for Job:</strong></label>
-                            <input class="form-control"  type="number"  step="0.01"  id="hoursbilled" name="hoursbilled">
+                            <input class="form-control"  type="number"  step="0.01"  id="hoursbilled" name="hoursbilled" required>
                         </div>
                         <div class="form-group">
                             <label for="Guest-Satisfaction-Level" class="col-form-label"><strong>Guest Satisfaction Level:</strong></label>
@@ -123,7 +123,7 @@ $eta_custom_date = $eta_custom_time = '';
                             </div>
                             <div class="form-check">
                                 <input
-                                class="form-check-input" type="radio" value=" Guest_dissatisfied_with_resolution_other issues"
+                                class="form-check-input" type="radio" value=" Guest_dissatisfied_with_resolution_other_issues"
                                 name="Guest_Satisfaction_Level_radio" id="Guest_Satisfaction_Level_radio3" required>
                                 <label class="form-check-label" for="Guest_Satisfaction_Level_radio3">The Guest was dissatisfied with this resolution and/or other issues
                                 </label>
@@ -134,6 +134,9 @@ $eta_custom_date = $eta_custom_time = '';
                                 name="Guest_Satisfaction_Level_radio" id="Guest_Satisfaction_Level_radio4" required>
                                 <label class="form-check-label" for="Guest_Satisfaction_Level_radio4">I'm not certain of the Guest's satisfaction level
                                 </label>
+                                <div class="invalid-feedback lostErrorMsg mt-3">
+                                     Please correct the errors above that are highlighted in red
+                                </div>
                             </div>
                         </div>
 
@@ -800,7 +803,7 @@ $eta_custom_date = $eta_custom_time = '';
         };
         $('input[name=eta_radio]').click(function() {
             var teamMemberId = $('.teammember').attr('teamMemberId');
-alert(teamMemberId);
+//alert(teamMemberId);
             $("input[type=radio][name=unable_resolve_eta_radio]").prop('checked', false);
             $("input[type=radio][name=custom_eta_radio]").prop('checked', false);
             $('.custom_field').hide();
@@ -992,7 +995,36 @@ alert(teamMemberId);
             //alert('Why did you press cancel? You should have confirmed');
         }
 
-        })
+        });
+
+
+
+        // Form Validation 
+
+            // Example starter JavaScript for disabling form submissions if there are invalid fields
+            (function () {
+            'use strict'
+
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                var forms = document.querySelectorAll('.needs-validation')
+
+                // Loop over them and prevent submission
+                Array.prototype.slice.call(forms)
+                    .forEach(function (form) {
+                        form.addEventListener('submit', function (event) {
+                            
+                            if (!form.checkValidity()) {
+                                $('.lostErrorMsg').show();
+                                event.preventDefault()
+                                event.stopPropagation()
+                            }
+                            else {
+                                $('.lostErrorMsg').hide();
+                            }
+                            form.classList.add('was-validated')
+                        }, false)
+                    })
+            })()
     
     });
     

@@ -123,3 +123,7 @@ body.my-login-page {
 	/* td a.maintenanceHistoryTable { 
 		display: block; 
 	} */
+	.lostErrorMsg {
+		font-size: 16px;
+		text-align: center;
+	  }
