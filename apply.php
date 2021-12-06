@@ -19,65 +19,7 @@ include 'inc/auth.php';
    
 </head>
 <style>
-.switch {
-  position: relative;
-  display: inline-block;
-  width: 42px !important;
-  height: 20px;
-}
 
-.switch input { 
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
-
-.slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ccc;
-  -webkit-transition: .4s;
-  transition: .4s;
-}
-
-.slider:before {
-  position: absolute;
-  content: "";
-  height: 15px;
-  width: 15px;
-  left: 0px;
-  bottom: 3px;
-  background-color: white;
-  -webkit-transition: .4s;
-  transition: .4s;
-}
-
-input:checked + .slider {
-  background-color: #2196F3;
-}
-
-input:focus + .slider {
-  box-shadow: 0 0 1px #2196F3;
-}
-
-input:checked + .slider:before {
-  -webkit-transform: translateX(26px);
-  -ms-transform: translateX(26px);
-  transform: translateX(26px);
-}
-
-/* Rounded sliders */
-.slider {
-  border-radius: 34px;
-}
-
-.slider:before {
-  border-radius: 50%;
-}
 .h6{
     margin: 10px !important;
 }
@@ -87,25 +29,127 @@ input:checked + .slider:before {
 #errphonemsg{
     color:red;
   }
-</style>
-<?php
-if(isset($_POST['submit'])){
-print_r($_POST);
-    $firstname= $_POST['firstname'];
-    $lastname= $_POST['lastname'];
-    $address= $_POST['address'];
-    $city= $_POST['city'];
-    $state= $_POST['state'];
-    $Zip= $_POST['Zip'];
-    $phone= $_POST['phone'];
-    $email= $_POST['email'];
-    $additionalInfo= $_POST['additionalInfo'];
-    $firstname= $_POST['firstname'];
-    $firstname= $_POST['firstname'];
-    $firstname= $_POST['firstname'];
+  .error-message{
+      display:none;
+  }
+
+  /* Switch Flat
+==========================*/
+.switch {
+	position: relative;
+	display: block;
+	vertical-align: top;
+	width: 100px !important;
+	height: 30px;
+	padding: 3px;
+	margin: 0 10px 10px 0;
+	background: linear-gradient(to bottom, #eeeeee, #FFFFFF 25px);
+	background-image: -webkit-linear-gradient(top, #eeeeee, #FFFFFF 25px);
+	border-radius: 18px;
+	box-shadow: inset 0 -1px white, inset 0 1px 1px rgba(0, 0, 0, 0.05);
+	cursor: pointer;
+	box-sizing:content-box;
+}
+.switch-input {
+	position: absolute;
+	top: 0;
+	left: 0;
+	opacity: 0;
+	box-sizing:content-box;
+}
+.switch-label {
+	position: relative;
+	display: block;
+	height: inherit;
+	font-size: 10px;
+	text-transform: uppercase;
+	background: #eceeef;
+	border-radius: inherit;
+	box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.12), inset 0 0 2px rgba(0, 0, 0, 0.15);
+	box-sizing:content-box;
+}
+.switch-label:before, .switch-label:after {
+	position: absolute;
+	top: 50%;
+	margin-top: -.5em;
+	line-height: 1;
+	-webkit-transition: inherit;
+	-moz-transition: inherit;
+	-o-transition: inherit;
+	transition: inherit;
+	box-sizing:content-box;
+}
+.switch-label:before {
+	content: attr(data-off);
+	right: 11px;
+	color: #aaaaaa;
+	text-shadow: 0 1px rgba(255, 255, 255, 0.5);
+}
+.switch-label:after {
+	content: attr(data-on);
+	left: 11px;
+	color: #FFFFFF;
+	text-shadow: 0 1px rgba(0, 0, 0, 0.2);
+	opacity: 0;
+}
+.switch-input:checked ~ .switch-label {
+	background: #007bff;
+	box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.15), inset 0 0 3px rgba(0, 0, 0, 0.2);
+}
+.switch-input:checked ~ .switch-label:before {
+	opacity: 0;
+}
+.switch-input:checked ~ .switch-label:after {
+	opacity: 1;
+}
+.switch-handle {
+	position: absolute;
+	top: 4px;
+	left: 4px;
+	width: 28px;
+	height: 28px;
+	background: linear-gradient(to bottom, #FFFFFF 40%, #f0f0f0);
+	background-image: -webkit-linear-gradient(top, #FFFFFF 40%, #f0f0f0);
+	border-radius: 100%;
+	box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+}
+.switch-handle:before {
+	content: "";
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin: -6px 0 0 -6px;
+	width: 12px;
+	height: 12px;
+	background: linear-gradient(to bottom, #eeeeee, #FFFFFF);
+	background-image: -webkit-linear-gradient(top, #eeeeee, #FFFFFF);
+	border-radius: 6px;
+	box-shadow: inset 0 1px rgba(0, 0, 0, 0.02);
+}
+.switch-input:checked ~ .switch-handle {
+	left: 74px;
+	box-shadow: -1px 1px 5px rgba(0, 0, 0, 0.2);
+}
+ 
+/* Transition
+========================== */
+.switch-label, .switch-handle {
+	transition: All 0.3s ease;
+	-webkit-transition: All 0.3s ease;
+	-moz-transition: All 0.3s ease;
+	-o-transition: All 0.3s ease;
+}
+.h4, h4{
+    text-align: center;
 
 }
-?>
+.text{
+    text-align: center !important;
+    padding-left: 220px;
+    padding-right: 220px;
+}
+</style>
+
 <body class="my-login-page">
     <section class="h-100">
         <div class="container h-100">
@@ -114,14 +158,26 @@ print_r($_POST);
                     <div class="brand">
                         <a href="/"><img src="img/logo.png" alt="Vacation Rental Management"></a>
                     </div>
-                    <!-- <span class="company_title"><?php// echo $_SESSION['user']['Fname'].' '.$_SESSION['user']['Lname']; ?> -->
-                        <!-- | <a href="user_profile.php">Profile</a> | <a href="logout.php">Logout</a></span> -->
-                    <form method="POST" name="apply_form" action="" class="needs-validation"
+                  <h4>Earn $xxxx per hour.</h4>
+                  <h4>Part-time. Flexible hours.</h4>
+                  <h4>Destin, Miramar, 30A</h4>
+                  <div class="text mt-3 mb-4">
+                    <p><span class="paragraph">_____ per hour for part time maintenance.  Flexible hours.  Local (real) company..</span></p>
+
+                    <p><span class="paragraph">Equisource Holdings Corp owns $27M in vacation rental properties between Destin and 30A.  You can see our properties here:<a href=" https://www.airbnb.com/users/139616238/listings">  https://www.airbnb.com/users/139616238/listings</a></span></p>
+
+                    <p><span class="paragraph">When our Guests or property inspectors need maintenance or Guest services, they use our smartphone app, which then texts and emails the maintenance and service vendors in our system.</span></p>
+                    <p><span class="paragraph">Many of our maintenance tasks are very simple (such as changing a light bulb or buying a replacement frying pan at Walmart).  Some of our tasks require more skill (such as patching drywall or installing a light fixture).</span></p>
+
+                    <p><span class="paragraph">Regardless of the task, we pay ____ per hour with a one hour minimum for assignments that you accept between 8 AM - 6 PM.and _____ per hour for assignments that you accept after 6 PM.   (Most assignments are between 8 AM - 6 PM,  take less than an hour and pay ____.).  Service providers can be both companies and individuals. </span></p>
+                </div>
+
+                    <form method="POST" name="apply_form" action="success.php" class="needs-validation"
                     id="apply_form"  novalidate>
                         <div class="card col-md-8 m-auto p-0">
                             <div class="card-header">
                                 <div class="inner_card_header text-center  m-auto">
-                                    <h4>Apply!</h4>
+                                    <h4>Please tell us about you! We’ll respond in less than 24 hours.</h4>
                                    
                                 </div>
                             </div>
@@ -170,7 +226,7 @@ print_r($_POST);
                                             <label for="email"><strong>Email</strong></label>
                                             <input type="email" id="email" name="email" class="form-control" required>
                                         </div>
-                                        <div class="row">
+                                        <!-- <div class="row">
                                             <div class="col-md-1 ml-2">
                                             <h6>Yes</h6>
                                             </div>
@@ -180,20 +236,16 @@ print_r($_POST);
                                             <div class="col-md-10">
                                             
                                             </div>
-                                        </div>
+                                        </div> -->
                                         
                                         <div class="form-group mb-4">   
                                             <div class="row mb-2">
                                                 <div class="col-md-3">
-                                                    <label class="switch">
-                                                    <input type="checkbox" value="yes">
-                                                    <span class="slider"></span>
-                                                    </label>
-                                                    
-                                                    <label class="switch">
-                                                    <input type="checkbox" value="no">
-                                                    <span class="slider"></span>
-                                                    </label>
+                                                <label class="switch switch-flat">
+                                                    <input class="switch-input" name="background" value="Y" type="checkbox"/>
+                                                    <span class="switch-label" data-on="yes" data-off="no"></span> 
+                                                    <span class="switch-handle"></span> 
+                                                </label>
                                                 </div>
                                                 <div class="col-md-9">
                                                     <label>I am able to pass a background check (no felonies)</label>
@@ -201,15 +253,11 @@ print_r($_POST);
                                             </div>
                                             <div class="row mb-2">
                                                 <div class="col-md-3">
-                                                    <label class="switch">
-                                                    <input type="checkbox" value="yes">
-                                                    <span class="slider"></span>
-                                                    </label>
-                                                    
-                                                    <label class="switch">
-                                                    <input type="checkbox" value="no">
-                                                    <span class="slider"></span>
-                                                    </label>
+                                                <label class="switch switch-flat">
+                                                    <input class="switch-input" name="smartphone" value="Y" type="checkbox"/>
+                                                    <span class="switch-label" data-on="yes" data-off="no"></span> 
+                                                    <span class="switch-handle"></span> 
+                                                </label>
                                                 </div>
                                                 <div class="col-md-9">
                                                     <label>I have a smart phone with data plan</label>
@@ -217,15 +265,12 @@ print_r($_POST);
                                             </div> 
                                             <div class="row mb-2">
                                                 <div class="col-md-3">
-                                                    <label class="switch">
-                                                    <input type="checkbox" value="yes">
-                                                    <span class="slider"></span>
-                                                    </label>
-                                                    
-                                                    <label class="switch">
-                                                    <input type="checkbox" value="no">
-                                                    <span class="slider"></span>
-                                                    </label>
+                                                <label class="switch switch-flat">
+                                                    <input class="switch-input" name="transportation" value="Y" type="checkbox"/>
+                                                    <span class="switch-label" data-on="yes" data-off="no"></span> 
+                                                    <span class="switch-handle"></span> 
+                                                </label>
+                                                   
                                                 </div>
                                                 <div class="col-md-9">
                                                     <label>I have my own dependable transportation</label>
@@ -233,15 +278,11 @@ print_r($_POST);
                                             </div>        
                                             <div class="row mb-2">
                                                 <div class="col-md-3">
-                                                    <label class="switch">
-                                                    <input type="checkbox" value="yes">
-                                                    <span class="slider"></span>
-                                                    </label>
-                                                    
-                                                    <label class="switch">
-                                                    <input type="checkbox" value="no">
-                                                    <span class="slider"></span>
-                                                    </label>
+                                                <label class="switch switch-flat">
+                                                    <input class="switch-input" name="customers" value="Y" type="checkbox"/>
+                                                    <span class="switch-label" data-on="yes" data-off="no"></span> 
+                                                    <span class="switch-handle"></span> 
+                                                </label>
                                                 </div>
                                                 <div class="col-md-9">
                                                     <label>I am comfortable and capable of speaking to customers</label>
@@ -251,76 +292,76 @@ print_r($_POST);
                                         <div class="form-group mb-4"> 
                                             <h6>I am willing and able to accept assignments</h6>
                                             <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value="Mon_9AM_6PM" id="authorizecheckbox"
-                                                    required>
+                                                <input class="form-check-input" name="checkbox_Mon_9AM_6PM" type="checkbox" value="1" id="authorizecheckbox">
                                                 <label class="form-check-label" for="authorize">
                                                 Monday 9 AM - 6 PM</label>                                   
                                             </div>
                                             <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value="Mon_6PM_10PM" id="authorizecheckbox"required>
+                                                <input class="form-check-input" name="checkbox_Mon_6PM_10PM" type="checkbox" value="1" id="authorizecheckbox">
                                                 <label class="form-check-label" for="authorize">
                                                 Monday 6 PM - 10 PM</label>                                   
                                             </div>
                                             <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value="Tues_9AM_6PM" id="authorizecheckbox" required>
+                                                <input class="form-check-input" name="checkbox_Tues_9AM_6PM" type="checkbox" value="1" id="authorizecheckbox">
                                                 <label class="form-check-label" for="authorize">
                                                 Tuesday 9 AM - 6 PM</label>                                   
                                             </div>
                                             <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value="Tues_6PM_10PM" id="authorizecheckbox" required>
+                                                <input class="form-check-input" name="checkbox_Tues_6PM_10PM" type="checkbox" value="1" id="authorizecheckbox">
                                                 <label class="form-check-label" for="authorize">
                                                 Tuesday 6 PM - 10 PM</label>                                   
                                             </div>
                                             <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value="Wed_9AM_6PM" id="authorizecheckbox"  required>
+                                                <input class="form-check-input" name="checkbox_Wed_9AM_6PM" type="checkbox" value="1" id="authorizecheckbox">
                                                 <label class="form-check-label" for="authorize">
                                                 Wednesday 9 AM - 6 PM</label>                                   
                                             </div>
                                             <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value="Wed_6PM_10PM" id="authorizecheckbox" required>
+                                                <input class="form-check-input" name="checkbox_Wed_6PM_10PM"  type="checkbox" value="1" id="authorizecheckbox">
                                                 <label class="form-check-label" for="authorize">
                                                 Wednesday 6 PM - 10 PM</label>                                   
                                             </div>
                                             <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value="Thurs_9AM_6PM" id="authorizecheckbox"  required>
+                                                <input class="form-check-input" name="checkbox_Thurs_9AM_6PM" type="checkbox" value="1" id="authorizecheckbox">
                                                 <label class="form-check-label" for="authorize">
                                                 Thursday 9 AM - 6 PM</label>                                   
                                             </div>
                                             <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value="Thurs_6PM_10PM" id="authorizecheckbox" required>
+                                                <input class="form-check-input" name="checkbox_Thurs_6PM_10PM" type="checkbox" value="1" id="authorizecheckbox">
                                                 <label class="form-check-label" for="authorize">
                                                 Thursday 6 PM - 10 PM</label>                                   
                                             </div>
                                             <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value="Fri_9AM_6PM" id="authorizecheckbox" required>
+                                                <input class="form-check-input" name="checkbox_Fri_9AM_6PM"  type="checkbox" value="1" id="authorizecheckbox">
                                                 <label class="form-check-label" for="authorize">
                                                 Friday 9 AM - 6 PM</label>                                   
                                             </div>
                                             <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value="Fri_6PM_10PM" id="authorizecheckbox"  required>
+                                                <input class="form-check-input" name="checkbox_Fri_6PM_10PM"  type="checkbox" value="1" id="authorizecheckbox">
                                                 <label class="form-check-label" for="authorize">
                                                 Friday 6 PM - 10 PM</label>                                   
                                             </div>
                                             <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value="Sat_9AM_6PM" id="authorizecheckbox" required>
+                                                <input class="form-check-input" name="checkbox_Sat_9AM_6PM" type="checkbox" value="1" id="authorizecheckbox">
                                                 <label class="form-check-label" for="authorize">
                                                 Saturday 9 AM - 6 PM</label>                                   
                                             </div>
                                             <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value="Sat_6PM_10PM" id="authorizecheckbox" required>
+                                                <input class="form-check-input" name="checkbox_Sat_6PM_10PM" type="checkbox" value="1" id="authorizecheckbox">
                                                 <label class="form-check-label" for="authorize">
                                                 Saturday 6 PM - 10 PM</label>                                   
                                             </div>
                                             <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value="Sun_9AM_6PM" id="authorizecheckbox" required>
+                                                <input class="form-check-input" name="checkbox_Sun_9AM_6PM" type="checkbox" value="1" id="authorizecheckbox">
                                                 <label class="form-check-label" for="authorize">
                                                 Sunday 9 AM - 6 PM</label>                                   
                                             </div>
                                             <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value="Sun_6PM_10PM" id="authorizecheckbox"  required>
+                                                <input class="form-check-input" name="checkbox_Sun_6PM_10PM"  type="checkbox" value="1" id="authorizecheckbox">
                                                 <label class="form-check-label" for="authorize">
                                                 Sunday 6 PM - 10 PM</label>                                   
                                             </div>
+                                            <span class="error-message"></span>
                                         </div>
                                         <div class="form-group mb-4">
                                             <label for="additionalInfo"><strong>Please tell us anything about yourself that may be helpful (such as similar maintenance or vacation rental experience):</strong></label>
@@ -345,12 +386,16 @@ print_r($_POST);
                                                     <label class="form-check-label" for="Immediate"> <?php echo $val['Description']; ?>
                                                 </label>
                                                     </div>
-                                                    <div class="col-md-1">
-                                                         <input class="form-check-input" type="radio" value="able_willing" name="Skills" id="able_willing" required>
+                                                    <div class="col-md-5">
+                                                        <label class="switch switch-flat">
+                                                            <input class="switch-input" name="smartphone" name="<?php echo $val['Description']; ?>" value="able_willing" type="checkbox"/>
+                                                            <span class="switch-label" data-on="able & willing" data-off="unable & unwilling" id="<?php echo $val['index']; ?>"></span> 
+                                                            <span class="switch-handle"></span> 
+                                                        </label>
+
+                                                         <!-- <input class="form-check-input" type="radio" value="able_willing" name="<?php// echo $val['Description']; ?>" id="<?php //echo $val['index']; ?>"> -->
                                                     </div>
-                                                    <div class="col-md-4">
-                                                        <input class="form-check-input" type="radio" value="unable_unwilling" name="Skills" id="unable_unwilling" required  >
-                                                    </div>
+                                                   
                                                 </div>
                                             </div>
                                             <?php } } ?>
@@ -407,11 +452,18 @@ print_r($_POST);
                 Array.prototype.slice.call(forms)
                     .forEach(function (form) {
                         form.addEventListener('submit', function (event) {
-                           
+                         var checkboxVal = $("input[type=checkbox]:checked").length;
+                           alert(checkboxVal);
                             if (!form.checkValidity()) {
                                 event.preventDefault()
                                 event.stopPropagation()
-                            }            
+                            } else if (checkboxVal == 0){
+                                alert("test");
+                                $('.error-message').html('Please select all above ckeckbox that apply').show();
+                                $('.error-message').addClass('cat_error');
+                                event.preventDefault()
+                                event.stopPropagation()
+                            }          
                             form.classList.add('was-validated')
                         }, false)
                     })
