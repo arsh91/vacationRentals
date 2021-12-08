@@ -176,7 +176,7 @@ if(isset($_POST['submit'])){
     $subject="NEW MAINTENANCE APPLICANT";
     $schedule_datetime = date('Y-m-d H:i:s');
     $bodytext ='<div><p>First Name = '.$firstname.' </p><p> Last Name = '.$lastname.' </p><p> Address = '.$address.' </p><p> City = '.$city.' </p> <p>  State = '.$state.' </p> <p> Zip = '.$Zip.' </p><p> Cell = '.$phone.' </p><p> Email = '.$email.' </p><p>  Background = '.$background.' </p><p> Smartphone  = '.$smartphone.' </p><p> Transportation = '.$transportation.' </p><p> Customers = '.$customers.' </p><p>  Monday 9 AM - 6 PM = '.$checkbox1.' </p><p>  Monday 6 PM - 10 PM = '.$checkbox2.' </p><p>  Tuesday 9 AM - 6 PM = '.$checkbox3.' </p><p>  Tuesday 6 PM - 10 PM = '.$checkbox4.' </p><p>  Wednesday 9 AM - 6 PM = '.$checkbox5.' </p><p>  Wednesday 6 PM - 10 PM = '.$checkbox6.' </p><p>  Thursday 9 AM - 6 PM = '.$checkbox7.' </p><p>  Thursday 6 PM - 10 PM = '.$checkbox8.' </p><p>  Friday 9 AM - 6 PM = '.$checkbox9.' </p><p>  Friday 6 PM - 10 PM = '.$checkbox10.' </p><p>  Saturday 9 AM - 6 PM   = '.$checkbox11.' </p><p>  Saturday 6 PM - 10 PM = '.$checkbox12.' </p><p>  Saturday 6 PM - 10 PM = '.$checkbox13.' </p><p>  Sunday 6 PM - 10 PM = '.$checkbox14.' </p><p>  AdditionalInfo	 = '.$additionalInfo.' </p><p>Skills: </p>'.$skilsHtml.'</div>';
-    print_r($bodytext);
+    // print_r($bodytext);
 
     sendEmail($email, $subject, $bodytext, $email, $schedule_datetime);
     ?>

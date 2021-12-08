@@ -22,9 +22,7 @@ include 'db_connection.php';
 .h6{
     margin: 10px !important;
 }
-.Skills{
-    width: 400px ! important;
-}
+
 #errphonemsg{
     color:red;
   }
@@ -153,17 +151,40 @@ include 'db_connection.php';
     text-transform: none !important;
 }
 
-.skills-error-message{
-    color:red;
-    font-size: 16px;
-    margin-top:200px;
+
+textarea.address{
+    height: 40px !important; 
 }
+
+body.my-login-page {
+    font-size: 16px !important;
+}
+.skill-radio-cont{
+    float: left;
+}
+.skill-radio-cont.skill_able{
+    width: 42%;
+}
+.skill-radio-cont.skill_unable{
+    width: 54%;
+}
+.skill-radio-label{
+    float: left;
+    width: 75% !important;
+    font-size:13px;
+}
+.skill-radio-cont input[type=radio]{position: relative;margin: 5px 10px 0px 0px;float:left;}
+.skillLabel{font-weight: 500;}
+
+.availabilities_time{
+    position: absolute;
+    left: 110px;}
 </style>
 
 <body class="my-login-page">
     <section class="h-100">
         <div class="container h-100">
-            <div class="row justify-content-md-center h-100">
+            <div class="row justify-content-md-center align-items-center h-100">
                 <div class="card-wrapper">
                     <div class="brand">
                         <a href="/"><img src="img/logo.png" alt="Vacation Rental Management"></a>
@@ -171,16 +192,17 @@ include 'db_connection.php';
                   <h4>Earn $xxxx per hour.</h4>
                   <h4>Part-time. Flexible hours.</h4>
                   <h4>Destin, Miramar, 30A</h4>
-                  <div class="text mt-3 mb-4">
-                    <p><span class="paragraph">_____ per hour for part time maintenance.  Flexible hours.  Local (real) company..</span></p>
+                  <div class="col-md-8 m-auto  mt-3 mb-4">
+                      <p></p>
+                        <p>_____ per hour for part time maintenance.  Flexible hours.  Local (real) company..</p>
 
-                    <p><span class="paragraph">Equisource Holdings Corp owns $27M in vacation rental properties between Destin and 30A.  You can see our properties here:<a href=" https://www.airbnb.com/users/139616238/listings">  https://www.airbnb.com/users/139616238/listings</a></span></p>
+                        <p> Equisource Holdings Corp owns $27M in vacation rental properties between Destin and 30A.  You can see our properties here:<a style="word-break: break-word;" href=" https://www.airbnb.com/users/139616238/listings" target="_blank">  https://www.airbnb.com/users/139616238/listings</a></p>
 
-                    <p><span class="paragraph">When our Guests or property inspectors need maintenance or Guest services, they use our smartphone app, which then texts and emails the maintenance and service vendors in our system.</span></p>
-                    <p><span class="paragraph">Many of our maintenance tasks are very simple (such as changing a light bulb or buying a replacement frying pan at Walmart).  Some of our tasks require more skill (such as patching drywall or installing a light fixture).</span></p>
+                        <p>When our Guests or property inspectors need maintenance or Guest services, they use our smartphone app, which then texts and emails the maintenance and service vendors in our system.
+                        Many of our maintenance tasks are very simple (such as changing a light bulb or buying a replacement frying pan at Walmart).  Some of our tasks require more skill (such as patching drywall or installing a light fixture).</p>
 
-                    <p><span class="paragraph">Regardless of the task, we pay ____ per hour with a one hour minimum for assignments that you accept between 8 AM - 6 PM.and _____ per hour for assignments that you accept after 6 PM.   (Most assignments are between 8 AM - 6 PM,  take less than an hour and pay ____.).  Service providers can be both companies and individuals. </span></p>
-                </div>
+                        <p>Regardless of the task, we pay ____ per hour with a one hour minimum for assignments that you accept between 8 AM - 6 PM.and _____ per hour for assignments that you accept after 6 PM.   (Most assignments are between 8 AM - 6 PM,  take less than an hour and pay ____.).  Service providers can be both companies and individuals. </p>
+                    </div>
 
                     <form method="POST" name="apply_form" action="success.php" class="needs-validation"
                     id="apply_form"  novalidate>
@@ -206,17 +228,17 @@ include 'db_connection.php';
                                         </div>
                                         <div class="form-group mb-3">
                                             <label for="address"><strong>Address</strong></label>
-                                            <textarea class="form-control rounded-0" id="address"
+                                            <textarea class="form-control rounded-0 address" id="address"
                                                 name="address" rows="0" required></textarea>
                                             </textarea>
                                         </div>
                                         <div class="form-group row mb-3">
-                                            <div class="form-group col-md-6 mb-3">
+                                            <div class="col-md-6 mb-3">
                                                 <label for="city"><strong>City</strong></label>
                                                 <input type="text" name="city" class="form-control" required>
                                             </div>
                                         
-                                            <div class="col-md-3">
+                                            <div class="col-md-3 mb-3">
                                                 <label for="state"><strong>State</strong></label>
                                                     <input type="text" name="state" class="form-control" required>
                                             </div>
@@ -302,75 +324,73 @@ include 'db_connection.php';
                                         <div class="form-group mb-2"> 
                                             <h6>I am willing and able to accept assignments(check all that apply)</h6>
                                             <div class="form-check">
-                                                <input class="form-check-input" name="checkbox_Mon_9AM_6PM" type="checkbox" value="1" id="authorizecheckbox">
-                                                <label class="" for="authorize">
-                                                Monday 9 AM - 6 PM</label>                                   
+                                                <input class="form-check-input" name="checkbox_Mon_9AM_6PM" type="checkbox" value="1" id="checkbox_Mon_9AM_6PM">
+                                                <label class="" for="checkbox_Mon_9AM_6PM">
+                                                Monday <span class="availabilities_time">9 AM - 6 PM</span></label>                                   
                                             </div>
                                             <div class="form-check">
-                                                <input class="form-check-input" name="checkbox_Mon_6PM_10PM" type="checkbox" value="1" id="authorizecheckbox">
-                                                <label class="" for="authorize">
-                                                Monday 6 PM - 10 PM</label>                                   
+                                                <input class="form-check-input" name="checkbox_Mon_6PM_10PM" type="checkbox" value="1" id="checkbox_Mon_6PM_10PM">
+                                                <label class="" for="checkbox_Mon_6PM_10PM">
+                                                Monday <span class="availabilities_time">6 PM - 10 PM</span></label>                                   
                                             </div>
                                             <div class="form-check">
-                                                <input class="form-check-input" name="checkbox_Tues_9AM_6PM" type="checkbox" value="1" id="authorizecheckbox">
-                                                <label class="" for="authorize">
-                                                Tuesday 9 AM - 6 PM</label>                                   
+                                                <input class="form-check-input" name="checkbox_Tues_9AM_6PM" type="checkbox" value="1" id="checkbox_Tues_9AM_6PM">
+                                                <label class="" for="checkbox_Tues_9AM_6PM">
+                                                Tuesday <span class="availabilities_time">9 AM - 6 PM</span></label>                                   
                                             </div>
                                             <div class="form-check">
-                                                <input class="form-check-input" name="checkbox_Tues_6PM_10PM" type="checkbox" value="1" id="authorizecheckbox">
-                                                <label class="" for="authorize">
-                                                Tuesday 6 PM - 10 PM</label>                                   
+                                                <input class="form-check-input" name="checkbox_Tues_6PM_10PM" type="checkbox" value="1" id="checkbox_Tues_6PM_10PM">
+                                                <label class="" for="checkbox_Tues_6PM_10PM">
+                                                Tuesday <span class="availabilities_time">6 PM - 10 PM</span></label>                                   
                                             </div>
                                             <div class="form-check">
-                                                <input class="form-check-input" name="checkbox_Wed_9AM_6PM" type="checkbox" value="1" id="authorizecheckbox">
-                                                <label class="" for="authorize">
-                                                Wednesday 9 AM - 6 PM</label>                                   
+                                                <input class="form-check-input" name="checkbox_Wed_9AM_6PM" type="checkbox" value="1" id="checkbox_Wed_9AM_6PM">
+                                                <label class="" for="checkbox_Wed_9AM_6PM">
+                                                Wednesday <span class="availabilities_time">9 AM - 6 PM</span></label>                                   
                                             </div>
                                             <div class="form-check">
-                                                <input class="form-check-input" name="checkbox_Wed_6PM_10PM"  type="checkbox" value="1" id="authorizecheckbox">
-                                                <label class="" for="authorize">
-                                                Wednesday 6 PM - 10 PM</label>                                   
+                                                <input class="form-check-input" name="checkbox_Wed_6PM_10PM"  type="checkbox" value="1" id="checkbox_Wed_6PM_10PM">
+                                                <label class="" for="checkbox_Wed_6PM_10PM">
+                                                Wednesday <span class="availabilities_time">6 PM - 10 PM</span></label>                                   
                                             </div>
                                             <div class="form-check">
-                                                <input class="form-check-input" name="checkbox_Thurs_9AM_6PM" type="checkbox" value="1" id="authorizecheckbox">
-                                                <label class="" for="authorize">
-                                                Thursday 9 AM - 6 PM</label>                                   
+                                                <input class="form-check-input" name="checkbox_Thurs_9AM_6PM" type="checkbox" value="1" id="checkbox_Thurs_9AM_6PM">
+                                                <label class="" for="checkbox_Thurs_9AM_6PM">
+                                                Thursday <span class="availabilities_time">9 AM - 6 PM</span></label>                                   
                                             </div>
                                             <div class="form-check">
-                                                <input class="form-check-input" name="checkbox_Thurs_6PM_10PM" type="checkbox" value="1" id="authorizecheckbox">
-                                                <label class="" for="authorize">
-                                                Thursday 6 PM - 10 PM</label>                                   
+                                                <input class="form-check-input" name="checkbox_Thurs_6PM_10PM" type="checkbox" value="1" id="checkbox_Thurs_6PM_10PM">
+                                                <label class="" for="checkbox_Thurs_6PM_10PM">
+                                                Thursday <span class="availabilities_time">6 PM - 10 PM</span></label>                                   
                                             </div>
                                             <div class="form-check">
-                                                <input class="form-check-input" name="checkbox_Fri_9AM_6PM"  type="checkbox" value="1" id="authorizecheckbox">
-                                                <label class="" for="authorize">
-                                                Friday 9 AM - 6 PM</label>                                   
+                                                <input class="form-check-input" name="checkbox_Fri_9AM_6PM"  type="checkbox" value="1" id="checkbox_Fri_9AM_6PM">
+                                                <label class="" for="checkbox_Fri_9AM_6PM">
+                                                Friday <span class="availabilities_time">9 AM - 6 PM</span></label>                                   
                                             </div>
                                             <div class="form-check">
-                                                <input class="form-check-input" name="checkbox_Fri_6PM_10PM"  type="checkbox" value="1" id="authorizecheckbox">
-                                                <label class="" for="authorize">
-                                                Friday 6 PM - 10 PM</label>                                   
+                                                <input class="form-check-input" name="checkbox_Fri_6PM_10PM"  type="checkbox" value="1" id="checkbox_Fri_6PM_10PM">
+                                                <label class="" for="checkbox_Fri_6PM_10PM">
+                                                Friday <span class="availabilities_time">6 PM - 10 PM</span></label>                                   
                                             </div>
                                             <div class="form-check">
-                                                <input class="form-check-input" name="checkbox_Sat_9AM_6PM" type="checkbox" value="1" id="authorizecheckbox">
-                                                <label class="" for="authorize">
-                                                Saturday 9 AM - 6 PM</label>                                   
+                                                <input class="form-check-input" name="checkbox_Sat_9AM_6PM" type="checkbox" value="1" id="checkbox_Sat_9AM_6PM">
+                                                <label class="" for="checkbox_Sat_9AM_6PM">
+                                                Saturday <span class="availabilities_time">9 AM - 6 PM</span></label>                                   
                                             </div>
                                             <div class="form-check">
-                                                <input class="form-check-input" name="checkbox_Sat_6PM_10PM" type="checkbox" value="1" id="authorizecheckbox">
-                                                <label class="" for="authorize">
-                                                Saturday 6 PM - 10 PM</label>                                   
+                                                <input class="form-check-input" name="checkbox_Sat_6PM_10PM" type="checkbox" value="1" id="checkbox_Sat_6PM_10PM">
+                                                <label class="" for="checkbox_Sat_6PM_10PM">
+                                                Saturday <span class="availabilities_time">6 PM - 10 PM</span></label>                                   
                                             </div>
                                             <div class="form-check">
-                                                <input class="form-check-input" name="checkbox_Sun_9AM_6PM" type="checkbox" value="1" id="authorizecheckbox">
-                                                <label class="" for="authorize">
-                                                Sunday 9 AM - 6 PM</label>                                   
+                                                <input class="form-check-input" name="checkbox_Sun_9AM_6PM" type="checkbox" value="1" id="checkbox_Sun_9AM_6PM">
+                                                <label class="" for="checkbox_Sun_9AM_6PM">
+                                                Sunday <span class="availabilities_time">9 AM - 6 PM</span></label>                                   
                                             </div>
                                             <div class="form-check">
-                                                <input class="form-check-input" name="checkbox_Sun_6PM_10PM"  type="checkbox" value="1">
-                                                   
-                                                    <label class="" for="authorize">
-                                                    Sunday 6 PM - 10 PM</label>                                                                                                          
+                                                <input class="form-check-input" name="checkbox_Sun_6PM_10PM"  type="checkbox" value="1" id="checkbox_Sun_6PM_10PM">                                                  
+                                                <label class="" for="checkbox_Sun_6PM_10PM"> Sunday <span class="availabilities_time">6 PM - 10 PM</span></label>                                                                                                          
                                             </div>                                               
                                         </div>
                                         <span class="error-message"></span>
@@ -383,49 +403,35 @@ include 'db_connection.php';
                                         <div class="form-group mb-3">
                                             <label><strong>Please tell us about the type of skills that you have and the type of assignments that you are willing to accept. (Note: Please be very honest about your capabilities. However, the more that you are able and willing to do, the more assignments that you will be offered.)</strong></label>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                           
-                                            </div>
-                                            <div class="col-md-2 ml-4">
-                                            <h6>Able & Willing</h6>
-                                            </div>
-                                            <div class="col-md-2">
-                                            <h6>Unable & UnWilling</h6>
-                                            </div>
-                                            <div class="col-md-2">
-                                            
-                                            </div>
-                                        </div>
+                                        
                                         <div class="form-group mb-3">
 
-                                            <?php  $Skillslist = $db->query("SELECT * FROM Skillslist ORDER BY SortOrder DESC")->fetchAll(); 
+                                            <?php  $Skillslist = $db->query("SELECT * FROM Skillslist ORDER BY SortOrder ASC")->fetchAll(); 
                                                 //  echo "<pre>"; print_r($Skillslist); echo "</pre>";
                                            foreach($Skillslist as $val){
                                             if($val['CategoryHeading'] == "Y"){ ?>
-                                                <label class="form-check-label mt-2"><strong><?php echo $val['Description']; ?></strong></label>
-                                                <?php } else{?>
+                                                <hr />
+                                                <label class="form-check-label mt-2"><strong style="font-size:18px;"><?php echo $val['Description']; ?>: </strong></label>
+                                                <?php } else{ ?>
                                                     <div class="form-check pl-0">
                                                         <div class="row">
-                                                            <div class="col-md-7">
-                                                            <label class="form-check-label"> <?php echo $val['Description']; ?>
-                                                        </label>
-                                                            </div>
-                                                            <input type="hidden" name="skill_name[<?php echo $val['index']; ?>]" value="<?php echo $val['Description']; ?>">
-                                                            <div class="col-md-2">
-                                                                <input class="form-check-input skill" type="radio" value="able_willing" name="skills[<?php echo $val['index']; ?>]" id="<?php echo $val['index']; ?>" required>
-                                                            </div>
-                                                            <div class="col-md-3">
-                                                                <input class="form-check-input skill" type="radio" value="unable_unwilling" name="skills[<?php echo $val['index']; ?>]" id="<?php echo $val['index']; ?>" required>
-                                                            </div>
-                                                        
+                                                            <div class="col-md-12 mt-4">
+                                                                <input type="hidden" name="skill_name[<?php echo $val['index']; ?>]" value="<?php echo $val['Description']; ?>">
+                                                                <label class="skillLabel"> <?php echo $val['Description']; ?></label>
+                                                                <div class="skill-radio-cont skill_able pl-2">
+                                                                    <input class="skill form-check-input" type="radio" value="able_willing" name="skills[<?php echo $val['index']; ?>]" id="able_<?php echo $val['index']; ?>" required>
+                                                                    <label  class="skill-radio-label form-check-label" for="able_<?php echo $val['index']; ?>"> Able or Willing </label>
+                                                                </div>
+                                                                <div class="skill-radio-cont skill_unable">
+                                                                    <input class="skill form-check-input" type="radio" value="unable_unwilling" name="skills[<?php echo $val['index']; ?>]" id="unable_<?php echo $val['index']; ?>" required>
+                                                                    <label  class="skill-radio-label form-check-label" for="unable_<?php echo $val['index']; ?>"> Unable or UnWilling </label>
+                                                                </div>
+                                                            </div>                                                        
                                                         </div>
                                                     </div>
                                                 <?php } 
                                             } ?>
-                                        </div>
-                                        <span class="skills-error-message"></span> 
-                                            
+                                        </div>                                           
                                        
                                     </div>
                                 </div>
@@ -477,7 +483,6 @@ include 'db_connection.php';
                 Array.prototype.slice.call(forms)
                     .forEach(function (form) {
                         form.addEventListener('submit', function (event) {
-                        //   alert($(".YesNoSwitch").length);
                             if (!form.checkValidity()) {
                                 event.preventDefault()
                                 event.stopPropagation()
@@ -492,31 +497,12 @@ include 'db_connection.php';
 
                             }  
 
-                            var blank = false;
-                            $("input:radio").each(function() {
-                                var val = $('input:radio:checked').val();
-                                if (val === undefined) {
-                                    blank = true;
-                                    $('.skills-error-message').html('Please select all the above skills').show();
-                                    return false;
-                                    event.preventDefault()
-                                    event.stopPropagation()
-                                }else{
-                                    $('.skills-error-message').hide();
-                                }
-                            });
                             form.classList.add('was-validated')
                         }, false)
                     })
             })()
 
-            //submit confirmation
-                $('#apply_form').on('submit', function() {
-                if(confirm('Do you really want to Apply?')) {
-                    return true;
-                }
-                return false;
-                });
+
 
       
     });
