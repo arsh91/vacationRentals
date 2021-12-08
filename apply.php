@@ -1,6 +1,5 @@
 <?php
 include 'db_connection.php';
-include 'inc/auth.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -12,10 +11,10 @@ include 'inc/auth.php';
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="css/my-login.css"> 
-    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" />
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" />
   
-    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
-    <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
+    <script src="https://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="https://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
    
 </head>
 <style>
@@ -29,9 +28,7 @@ include 'inc/auth.php';
 #errphonemsg{
     color:red;
   }
-  .error-message{
-      display:none;
-  }
+  
 
   /* Switch Flat
 ==========================*/
@@ -148,6 +145,19 @@ include 'inc/auth.php';
     padding-left: 220px;
     padding-right: 220px;
 }
+.error-message{
+    color:red;
+    font-size: 16px;
+}
+.switch-label.skills{
+    text-transform: none !important;
+}
+
+.skills-error-message{
+    color:red;
+    font-size: 16px;
+    margin-top:200px;
+}
 </style>
 
 <body class="my-login-page">
@@ -242,7 +252,7 @@ include 'inc/auth.php';
                                             <div class="row mb-2">
                                                 <div class="col-md-3">
                                                 <label class="switch switch-flat">
-                                                    <input class="switch-input" name="background" value="Y" type="checkbox"/>
+                                                    <input class="switch-input YesNoSwitch" name="background" value="Y" type="checkbox"/>
                                                     <span class="switch-label" data-on="yes" data-off="no"></span> 
                                                     <span class="switch-handle"></span> 
                                                 </label>
@@ -254,7 +264,7 @@ include 'inc/auth.php';
                                             <div class="row mb-2">
                                                 <div class="col-md-3">
                                                 <label class="switch switch-flat">
-                                                    <input class="switch-input" name="smartphone" value="Y" type="checkbox"/>
+                                                    <input class="switch-input YesNoSwitch" name="smartphone" value="Y" type="checkbox"/>
                                                     <span class="switch-label" data-on="yes" data-off="no"></span> 
                                                     <span class="switch-handle"></span> 
                                                 </label>
@@ -266,7 +276,7 @@ include 'inc/auth.php';
                                             <div class="row mb-2">
                                                 <div class="col-md-3">
                                                 <label class="switch switch-flat">
-                                                    <input class="switch-input" name="transportation" value="Y" type="checkbox"/>
+                                                    <input class="switch-input YesNoSwitch" name="transportation" value="Y" type="checkbox"/>
                                                     <span class="switch-label" data-on="yes" data-off="no"></span> 
                                                     <span class="switch-handle"></span> 
                                                 </label>
@@ -279,7 +289,7 @@ include 'inc/auth.php';
                                             <div class="row mb-2">
                                                 <div class="col-md-3">
                                                 <label class="switch switch-flat">
-                                                    <input class="switch-input" name="customers" value="Y" type="checkbox"/>
+                                                    <input class="switch-input YesNoSwitch" name="customers" value="Y" type="checkbox"/>
                                                     <span class="switch-label" data-on="yes" data-off="no"></span> 
                                                     <span class="switch-handle"></span> 
                                                 </label>
@@ -287,83 +297,84 @@ include 'inc/auth.php';
                                                 <div class="col-md-9">
                                                     <label>I am comfortable and capable of speaking to customers</label>
                                                 </div>
-                                            </div>                                                  
+                                            </div>                                                 
                                         </div>
-                                        <div class="form-group mb-4"> 
-                                            <h6>I am willing and able to accept assignments</h6>
+                                        <div class="form-group mb-2"> 
+                                            <h6>I am willing and able to accept assignments(check all that apply)</h6>
                                             <div class="form-check">
                                                 <input class="form-check-input" name="checkbox_Mon_9AM_6PM" type="checkbox" value="1" id="authorizecheckbox">
-                                                <label class="form-check-label" for="authorize">
+                                                <label class="" for="authorize">
                                                 Monday 9 AM - 6 PM</label>                                   
                                             </div>
                                             <div class="form-check">
                                                 <input class="form-check-input" name="checkbox_Mon_6PM_10PM" type="checkbox" value="1" id="authorizecheckbox">
-                                                <label class="form-check-label" for="authorize">
+                                                <label class="" for="authorize">
                                                 Monday 6 PM - 10 PM</label>                                   
                                             </div>
                                             <div class="form-check">
                                                 <input class="form-check-input" name="checkbox_Tues_9AM_6PM" type="checkbox" value="1" id="authorizecheckbox">
-                                                <label class="form-check-label" for="authorize">
+                                                <label class="" for="authorize">
                                                 Tuesday 9 AM - 6 PM</label>                                   
                                             </div>
                                             <div class="form-check">
                                                 <input class="form-check-input" name="checkbox_Tues_6PM_10PM" type="checkbox" value="1" id="authorizecheckbox">
-                                                <label class="form-check-label" for="authorize">
+                                                <label class="" for="authorize">
                                                 Tuesday 6 PM - 10 PM</label>                                   
                                             </div>
                                             <div class="form-check">
                                                 <input class="form-check-input" name="checkbox_Wed_9AM_6PM" type="checkbox" value="1" id="authorizecheckbox">
-                                                <label class="form-check-label" for="authorize">
+                                                <label class="" for="authorize">
                                                 Wednesday 9 AM - 6 PM</label>                                   
                                             </div>
                                             <div class="form-check">
                                                 <input class="form-check-input" name="checkbox_Wed_6PM_10PM"  type="checkbox" value="1" id="authorizecheckbox">
-                                                <label class="form-check-label" for="authorize">
+                                                <label class="" for="authorize">
                                                 Wednesday 6 PM - 10 PM</label>                                   
                                             </div>
                                             <div class="form-check">
                                                 <input class="form-check-input" name="checkbox_Thurs_9AM_6PM" type="checkbox" value="1" id="authorizecheckbox">
-                                                <label class="form-check-label" for="authorize">
+                                                <label class="" for="authorize">
                                                 Thursday 9 AM - 6 PM</label>                                   
                                             </div>
                                             <div class="form-check">
                                                 <input class="form-check-input" name="checkbox_Thurs_6PM_10PM" type="checkbox" value="1" id="authorizecheckbox">
-                                                <label class="form-check-label" for="authorize">
+                                                <label class="" for="authorize">
                                                 Thursday 6 PM - 10 PM</label>                                   
                                             </div>
                                             <div class="form-check">
                                                 <input class="form-check-input" name="checkbox_Fri_9AM_6PM"  type="checkbox" value="1" id="authorizecheckbox">
-                                                <label class="form-check-label" for="authorize">
+                                                <label class="" for="authorize">
                                                 Friday 9 AM - 6 PM</label>                                   
                                             </div>
                                             <div class="form-check">
                                                 <input class="form-check-input" name="checkbox_Fri_6PM_10PM"  type="checkbox" value="1" id="authorizecheckbox">
-                                                <label class="form-check-label" for="authorize">
+                                                <label class="" for="authorize">
                                                 Friday 6 PM - 10 PM</label>                                   
                                             </div>
                                             <div class="form-check">
                                                 <input class="form-check-input" name="checkbox_Sat_9AM_6PM" type="checkbox" value="1" id="authorizecheckbox">
-                                                <label class="form-check-label" for="authorize">
+                                                <label class="" for="authorize">
                                                 Saturday 9 AM - 6 PM</label>                                   
                                             </div>
                                             <div class="form-check">
                                                 <input class="form-check-input" name="checkbox_Sat_6PM_10PM" type="checkbox" value="1" id="authorizecheckbox">
-                                                <label class="form-check-label" for="authorize">
+                                                <label class="" for="authorize">
                                                 Saturday 6 PM - 10 PM</label>                                   
                                             </div>
                                             <div class="form-check">
                                                 <input class="form-check-input" name="checkbox_Sun_9AM_6PM" type="checkbox" value="1" id="authorizecheckbox">
-                                                <label class="form-check-label" for="authorize">
+                                                <label class="" for="authorize">
                                                 Sunday 9 AM - 6 PM</label>                                   
                                             </div>
                                             <div class="form-check">
-                                                <input class="form-check-input" name="checkbox_Sun_6PM_10PM"  type="checkbox" value="1" id="authorizecheckbox">
-                                                <label class="form-check-label" for="authorize">
-                                                Sunday 6 PM - 10 PM</label>                                   
-                                            </div>
-                                            <span class="error-message"></span>
+                                                <input class="form-check-input" name="checkbox_Sun_6PM_10PM"  type="checkbox" value="1">
+                                                   
+                                                    <label class="" for="authorize">
+                                                    Sunday 6 PM - 10 PM</label>                                                                                                          
+                                            </div>                                               
                                         </div>
-                                        <div class="form-group mb-4">
+                                        <span class="error-message"></span>
+                                        <div class="form-group mt-2 mb-4">
                                             <label for="additionalInfo"><strong>Please tell us anything about yourself that may be helpful (such as similar maintenance or vacation rental experience):</strong></label>
                                             <textarea class="form-control rounded-0" id="additionalInfo"
                                                 name="additionalInfo" rows="0" Placeholder="(optional)"></textarea>
@@ -372,34 +383,48 @@ include 'inc/auth.php';
                                         <div class="form-group mb-3">
                                             <label><strong>Please tell us about the type of skills that you have and the type of assignments that you are willing to accept. (Note: Please be very honest about your capabilities. However, the more that you are able and willing to do, the more assignments that you will be offered.)</strong></label>
                                         </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                           
+                                            </div>
+                                            <div class="col-md-2 ml-4">
+                                            <h6>Able & Willing</h6>
+                                            </div>
+                                            <div class="col-md-2">
+                                            <h6>Unable & UnWilling</h6>
+                                            </div>
+                                            <div class="col-md-2">
+                                            
+                                            </div>
+                                        </div>
                                         <div class="form-group mb-3">
 
                                             <?php  $Skillslist = $db->query("SELECT * FROM Skillslist ORDER BY SortOrder DESC")->fetchAll(); 
                                                 //  echo "<pre>"; print_r($Skillslist); echo "</pre>";
                                            foreach($Skillslist as $val){
-                                           if($val['CategoryHeading'] == "Y"){ ?>
-                                             <label class="form-check-label mt-2"><strong><?php echo $val['Description']; ?></strong></label>
-                                             <?php } else{?>
-                                            <div class="form-check pl-0">
-                                                <div class="row">
-                                                    <div class="col-md-7">
-                                                    <label class="form-check-label" for="Immediate"> <?php echo $val['Description']; ?>
-                                                </label>
-                                                    </div>
-                                                    <div class="col-md-5">
-                                                        <label class="switch switch-flat">
-                                                            <input class="switch-input" name="smartphone" name="<?php echo $val['Description']; ?>" value="able_willing" type="checkbox"/>
-                                                            <span class="switch-label" data-on="able & willing" data-off="unable & unwilling" id="<?php echo $val['index']; ?>"></span> 
-                                                            <span class="switch-handle"></span> 
+                                            if($val['CategoryHeading'] == "Y"){ ?>
+                                                <label class="form-check-label mt-2"><strong><?php echo $val['Description']; ?></strong></label>
+                                                <?php } else{?>
+                                                    <div class="form-check pl-0">
+                                                        <div class="row">
+                                                            <div class="col-md-7">
+                                                            <label class="form-check-label"> <?php echo $val['Description']; ?>
                                                         </label>
-
-                                                         <!-- <input class="form-check-input" type="radio" value="able_willing" name="<?php// echo $val['Description']; ?>" id="<?php //echo $val['index']; ?>"> -->
+                                                            </div>
+                                                            <input type="hidden" name="skill_name[<?php echo $val['index']; ?>]" value="<?php echo $val['Description']; ?>">
+                                                            <div class="col-md-2">
+                                                                <input class="form-check-input skill" type="radio" value="able_willing" name="skills[<?php echo $val['index']; ?>]" id="<?php echo $val['index']; ?>" required>
+                                                            </div>
+                                                            <div class="col-md-3">
+                                                                <input class="form-check-input skill" type="radio" value="unable_unwilling" name="skills[<?php echo $val['index']; ?>]" id="<?php echo $val['index']; ?>" required>
+                                                            </div>
+                                                        
+                                                        </div>
                                                     </div>
-                                                   
-                                                </div>
-                                            </div>
-                                            <?php } } ?>
+                                                <?php } 
+                                            } ?>
                                         </div>
+                                        <span class="skills-error-message"></span> 
                                             
                                        
                                     </div>
@@ -452,27 +477,41 @@ include 'inc/auth.php';
                 Array.prototype.slice.call(forms)
                     .forEach(function (form) {
                         form.addEventListener('submit', function (event) {
-                         var checkboxVal = $("input[type=checkbox]:checked").length;
-                           alert(checkboxVal);
+                        //   alert($(".YesNoSwitch").length);
                             if (!form.checkValidity()) {
                                 event.preventDefault()
                                 event.stopPropagation()
-                            } else if (checkboxVal == 0){
-                                alert("test");
-                                $('.error-message').html('Please select all above ckeckbox that apply').show();
-                                $('.error-message').addClass('cat_error');
+                            } 
+                            if($("input[type=checkbox]:checked").length == 0){
+                                $('.error-message').html('Please select atleast one above ckeckbox  ').show();
                                 event.preventDefault()
                                 event.stopPropagation()
-                            }          
+                                
+                            } else{
+                                $('.error-message').hide();
+
+                            }  
+
+                            var blank = false;
+                            $("input:radio").each(function() {
+                                var val = $('input:radio:checked').val();
+                                if (val === undefined) {
+                                    blank = true;
+                                    $('.skills-error-message').html('Please select all the above skills').show();
+                                    return false;
+                                    event.preventDefault()
+                                    event.stopPropagation()
+                                }else{
+                                    $('.skills-error-message').hide();
+                                }
+                            });
                             form.classList.add('was-validated')
                         }, false)
                     })
             })()
 
             //submit confirmation
-
                 $('#apply_form').on('submit', function() {
-
                 if(confirm('Do you really want to Apply?')) {
                     return true;
                 }

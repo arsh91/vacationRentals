@@ -278,8 +278,8 @@ include 'inc/auth.php';
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"
-                                            data-dismiss="modal">Close</button>
-                                        <button type="submit" name="insertnotes" class="btn btn-primary">Submit</button>
+                                            data-dismiss="modal">Cancel</button>
+                                        <button type="submit" name="insertnotes" class="btn btn-primary">Close Ticket</button>
                                     </div>
                                 </form>
                             </div>

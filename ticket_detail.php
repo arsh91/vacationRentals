@@ -38,11 +38,11 @@ else{
 
 // UPDATE THE FIELDS AFTER TICKET CLOSED
 if(isset($_POST['closeinput']) && $_POST['closeinput'] == "1"){
-    
+    $closedByAdmin = $_POST['closedByAdmin'];
     $notes = $_POST['notes'];
     $hoursbilled = $_POST['hoursbilled'];
     $GuestSatisfactionLevel = $_POST['Guest_Satisfaction_Level_radio'];
-    $closeTicketData = $db->query('UPDATE MaintenanceTicket SET Notes = ?, ClosedDate = ?, ClosedTime= ?, ClosedBy= ?, Hoursbilled=?, Guestsatisfactionlevel=? WHERE TicketNum= ?', $notes, $close_date, $close_time, $teamMemberNo, $hoursbilled,  $GuestSatisfactionLevel, $ticketNumber);
+    $closeTicketData = $db->query('UPDATE MaintenanceTicket SET Notes = ?, ClosedDate = ?, ClosedTime= ?, ClosedBy= ?, Closedbyadmin=?, Hoursbilled=?, Guestsatisfactionlevel=? WHERE TicketNum= ?', $notes, $close_date, $close_time, $teamMemberNo, $closedByAdmin, $hoursbilled,  $GuestSatisfactionLevel, $ticketNumber);
 }
 
 $current_date = date("Y-m-d H:i:s");
@@ -139,12 +139,12 @@ $eta_custom_date = $eta_custom_time = '';
                                 </div>
                             </div>
                         </div>
-
+                        <input type="hidden" class="closedByAdmin" value="" name="closedByAdmin">
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                         <button type="submit" name="insertnotes" id="submitnotes"
-                            class="btn btn-primary">Submit</button>
+                            class="btn btn-primary">Closed Ticket</button>
                     </div>
                 </form>
             </div>
@@ -571,18 +571,24 @@ $eta_custom_date = $eta_custom_time = '';
                                 
                                         <div class="card-footer"> 
                                             <div class="row"> 
-                                                <div class="col-md-4">
+                                                <div class="col-md-2">
                                                 </div>     
-                                                <div class="form-group  text-center col-md-4 ">
-                                                    <?php   if($ticketData['ClosedDate'] == "" || $ticketData['ClosedDate'] == NULL ) { ?>         
-                                                    <button type="button" name="CloseTicket" id="ticketClose"
+                                                <div class="form-group  text-center col-md-8 ">
+                                                    <?php   if($ticketData['ClosedDate'] == "" || $ticketData['ClosedDate'] == NULL ) { 
+                                                        if($teamAdminData['admin'] == 'Y') {
+                                                        ?>    
+
+                                                            <button type="button" name="CloseTicket" id="AdminCloseTicket"
+                                                        class="btn btn-primary closedticket mr-2">Admin Close </button>
+                                                        <?php } ?>
+                                                    <button type="button" name="CloseTicket" id="CloseTicket"
                                                         class="btn btn-primary closedticket mr-2">Close Ticket</button>
                                                 <?php } ?>
                                                     <button type="button" name="ClosePage" id="closePage"
                                                         class="btn btn-primary closepage">Close Page</button>
                                                 </div>
                                             </div>
-                                            <div class="col-md-4">
+                                            <div class="col-md-2">
                                                 </div>  
                                             
                                         </div>
@@ -986,24 +992,28 @@ $eta_custom_date = $eta_custom_time = '';
         });
 
         //Close Ticket
-        $('#ticketClose').click(function () {
+        $('.closedticket').click(function () {
             $('textarea#notes').val('');
             $('#hoursbilled').val('');
+            $('.closedByAdmin').val('');
             $('input[name="Guest_Satisfaction_Level_radio"]').prop('checked', false);
             $('.closeTicketForm').removeClass('was-validated');
             $('.lostErrorMsg').hide();
 
-
-
         if (confirm('If the Guest is satisfied and this ticket is complete, click OK to close this ticket. \r\n If the ticket is incomplete, click cancel to leave the ticket open.')) {
             $('#submitModal').modal("show");
         } else {
-
             //alert('Why did you press cancel? You should have confirmed');
         }
-
         });
 
+        //CLICK FUNCTION FOR CLOSED BY ADMIN VALUE
+        $('#CloseTicket').click(function () {
+            $('.closedByAdmin').val('N');
+        });
+        $('#AdminCloseTicket').click(function () {
+            $('.closedByAdmin').val('Y');
+        });
 
 
         // Form Validation 
